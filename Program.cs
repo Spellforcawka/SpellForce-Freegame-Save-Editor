@@ -83,6 +83,25 @@ namespace SFSE
             Empty = 255,
         }
 
+        public enum AbilityLevel : Byte
+        {
+            _1 = 1,
+            _2,
+            _3,
+            _4,
+            _5,
+            _6,
+            _7,
+            _8,
+            _9,
+            _10,
+            _11,
+            _12,
+            Empty = 255
+        }
+
+        public static SaveData LoadedData;
+
         public static unsafe byte[] SerializeValueType<T>(in T value) where T : unmanaged
         {
             byte[] result = new byte[sizeof(T)];
@@ -97,6 +116,67 @@ namespace SFSE
                 return *(T*)src;
         }
 
+        public static void UpdateSubtypeChoices(ListBox typeListBox, ListBox subtypeListBox)
+        {
+            switch (typeListBox.SelectedValue)
+            {
+                case Program.AbilityType.LightCombatArts:
+                    subtypeListBox.DataSource = Enum.GetValues(typeof(Program.LightCombatArtsSubtype));
+                    break;
+                case Program.AbilityType.HeavyCombatArts:
+                    subtypeListBox.DataSource = Enum.GetValues(typeof(Program.HeavyCombatArtsSubtype));
+                    break;
+                case Program.AbilityType.RangedCombatArts:
+                    subtypeListBox.DataSource = Enum.GetValues(typeof(Program.RangedCombatArtsSubtype));
+                    break;
+                case Program.AbilityType.WhiteMagic:
+                    subtypeListBox.DataSource = Enum.GetValues(typeof(Program.WhiteMagicSubtype));
+                    break;
+                case Program.AbilityType.ElementalMagic:
+                    subtypeListBox.DataSource = Enum.GetValues(typeof(Program.ElementalMagicSubtype));
+                    break;
+                case Program.AbilityType.MindMagic:
+                    subtypeListBox.DataSource = Enum.GetValues(typeof(Program.MindMagicSubtype));
+                    break;
+                case Program.AbilityType.BlackMagic:
+                    subtypeListBox.DataSource = Enum.GetValues(typeof(Program.BlackMagicSubtype));
+                    break;
+                case Program.AbilityType.Empty:
+                    subtypeListBox.DataSource = Enum.GetValues(typeof(Program.EmptySubtype));
+                    break;
+            }
+        }
+
+        public static void UpdateSubtypeValue(ListBox typeListBox, ListBox subtypeListBox, Byte value)
+        {
+            switch (typeListBox.SelectedValue)
+            {
+                case Program.AbilityType.LightCombatArts:
+                    subtypeListBox.SelectedItem = (Program.LightCombatArtsSubtype)value;
+                    break;
+                case Program.AbilityType.HeavyCombatArts:
+                    subtypeListBox.SelectedItem = (Program.HeavyCombatArtsSubtype)value;
+                    break;
+                case Program.AbilityType.RangedCombatArts:
+                    subtypeListBox.SelectedItem = (Program.RangedCombatArtsSubtype)value;
+                    break;
+                case Program.AbilityType.WhiteMagic:
+                    subtypeListBox.SelectedItem = (Program.WhiteMagicSubtype)value;
+                    break;
+                case Program.AbilityType.ElementalMagic:
+                    subtypeListBox.SelectedItem = (Program.ElementalMagicSubtype)value;
+                    break;
+                case Program.AbilityType.MindMagic:
+                    subtypeListBox.SelectedItem = (Program.MindMagicSubtype)value;
+                    break;
+                case Program.AbilityType.BlackMagic:
+                    subtypeListBox.SelectedItem = (Program.BlackMagicSubtype)value;
+                    break;
+                case Program.AbilityType.Empty:
+                    subtypeListBox.SelectedItem = (Program.EmptySubtype)value;
+                    break;
+            }
+        }
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
