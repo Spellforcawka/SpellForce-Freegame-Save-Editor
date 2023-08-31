@@ -30,7 +30,6 @@
         {
             OpenFileDialog = new OpenFileDialog();
             OpenFileButton = new Button();
-            LevelLabel = new Label();
             LevelTextBox = new TextBox();
             LevelProgressTrackBar = new TrackBar();
             AgilityLabel = new Label();
@@ -49,17 +48,41 @@
             WisdomLabel = new Label();
             FreeStatPointsTextBox = new TextBox();
             FreeStatPointsLabel = new Label();
-            AbilityTypeListBox = new ListBox();
-            AbilitySubtypeListBox = new ListBox();
-            AbilitySlotListBox = new ListBox();
-            AbilityLevelListBox = new ListBox();
-            AbilitySlotLabel = new Label();
-            AbilityTypeLabel = new Label();
-            AbilitySubtypeLabel = new Label();
-            AbilityLevelLabel = new Label();
+            GoldTextBox = new TextBox();
+            GoldLabel = new Label();
+            SilverTextBox = new TextBox();
+            SilverLabel = new Label();
+            CopperTextBox = new TextBox();
+            CopperLabel = new Label();
+            AbilitiesGroupBox = new GroupBox();
             FreeAbilityPointsTextBox = new TextBox();
             FreeAbilityPointsLabel = new Label();
+            AbilityLevelLabel = new Label();
+            AbilitySubtypeLabel = new Label();
+            AbilityTypeLabel = new Label();
+            AbilitySlotLabel = new Label();
+            AbilityLevelListBox = new ListBox();
+            AbilitySlotListBox = new ListBox();
+            AbilitySubtypeListBox = new ListBox();
+            AbilityTypeListBox = new ListBox();
+            StatPointsGroupBox = new GroupBox();
+            MoneyGroupBox = new GroupBox();
+            LevelGroupBox = new GroupBox();
+            AvatarInfoGroupBox = new GroupBox();
+            SaveDateContentLabel = new Label();
+            AvatarModelContentLabel = new Label();
+            AvatarModelLabel = new Label();
+            SaveDateLabel = new Label();
+            AvatarSexContentLabel = new Label();
+            AvatarSexLabel = new Label();
+            AvatarNameContentLabel = new Label();
+            AvatarNameLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)LevelProgressTrackBar).BeginInit();
+            AbilitiesGroupBox.SuspendLayout();
+            StatPointsGroupBox.SuspendLayout();
+            MoneyGroupBox.SuspendLayout();
+            LevelGroupBox.SuspendLayout();
+            AvatarInfoGroupBox.SuspendLayout();
             SuspendLayout();
             // 
             // OpenFileDialog
@@ -79,19 +102,10 @@
             OpenFileButton.UseVisualStyleBackColor = true;
             OpenFileButton.Click += OpenFile_Click;
             // 
-            // LevelLabel
-            // 
-            LevelLabel.AutoSize = true;
-            LevelLabel.Location = new Point(66, 67);
-            LevelLabel.Name = "LevelLabel";
-            LevelLabel.Size = new Size(37, 15);
-            LevelLabel.TabIndex = 1;
-            LevelLabel.Text = "Level:";
-            // 
             // LevelTextBox
             // 
             LevelTextBox.Enabled = false;
-            LevelTextBox.Location = new Point(109, 64);
+            LevelTextBox.Location = new Point(6, 31);
             LevelTextBox.MaxLength = 2;
             LevelTextBox.Name = "LevelTextBox";
             LevelTextBox.Size = new Size(28, 23);
@@ -102,10 +116,10 @@
             LevelProgressTrackBar.BackColor = Color.Black;
             LevelProgressTrackBar.Enabled = false;
             LevelProgressTrackBar.LargeChange = 25;
-            LevelProgressTrackBar.Location = new Point(143, 55);
+            LevelProgressTrackBar.Location = new Point(40, 22);
             LevelProgressTrackBar.Maximum = 100;
             LevelProgressTrackBar.Name = "LevelProgressTrackBar";
-            LevelProgressTrackBar.Size = new Size(155, 45);
+            LevelProgressTrackBar.Size = new Size(159, 45);
             LevelProgressTrackBar.SmallChange = 25;
             LevelProgressTrackBar.TabIndex = 4;
             LevelProgressTrackBar.TickFrequency = 25;
@@ -114,7 +128,7 @@
             // AgilityLabel
             // 
             AgilityLabel.AutoSize = true;
-            AgilityLabel.Location = new Point(59, 197);
+            AgilityLabel.Location = new Point(53, 111);
             AgilityLabel.Name = "AgilityLabel";
             AgilityLabel.Size = new Size(44, 15);
             AgilityLabel.TabIndex = 5;
@@ -123,7 +137,7 @@
             // AgilityTextBox
             // 
             AgilityTextBox.Enabled = false;
-            AgilityTextBox.Location = new Point(109, 194);
+            AgilityTextBox.Location = new Point(103, 108);
             AgilityTextBox.MaxLength = 3;
             AgilityTextBox.Name = "AgilityTextBox";
             AgilityTextBox.Size = new Size(28, 23);
@@ -132,7 +146,7 @@
             // CharismaTextBox
             // 
             CharismaTextBox.Enabled = false;
-            CharismaTextBox.Location = new Point(109, 281);
+            CharismaTextBox.Location = new Point(103, 195);
             CharismaTextBox.MaxLength = 3;
             CharismaTextBox.Name = "CharismaTextBox";
             CharismaTextBox.Size = new Size(28, 23);
@@ -141,7 +155,7 @@
             // CharismaLabel
             // 
             CharismaLabel.AutoSize = true;
-            CharismaLabel.Location = new Point(43, 284);
+            CharismaLabel.Location = new Point(37, 198);
             CharismaLabel.Name = "CharismaLabel";
             CharismaLabel.Size = new Size(60, 15);
             CharismaLabel.TabIndex = 7;
@@ -150,7 +164,7 @@
             // DexterityTextBox
             // 
             DexterityTextBox.Enabled = false;
-            DexterityTextBox.Location = new Point(109, 165);
+            DexterityTextBox.Location = new Point(103, 79);
             DexterityTextBox.MaxLength = 3;
             DexterityTextBox.Name = "DexterityTextBox";
             DexterityTextBox.Size = new Size(28, 23);
@@ -159,7 +173,7 @@
             // DexterityLabel
             // 
             DexterityLabel.AutoSize = true;
-            DexterityLabel.Location = new Point(46, 168);
+            DexterityLabel.Location = new Point(40, 82);
             DexterityLabel.Name = "DexterityLabel";
             DexterityLabel.Size = new Size(57, 15);
             DexterityLabel.TabIndex = 9;
@@ -168,7 +182,7 @@
             // IntelligenceTextBox
             // 
             IntelligenceTextBox.Enabled = false;
-            IntelligenceTextBox.Location = new Point(109, 223);
+            IntelligenceTextBox.Location = new Point(103, 137);
             IntelligenceTextBox.MaxLength = 3;
             IntelligenceTextBox.Name = "IntelligenceTextBox";
             IntelligenceTextBox.Size = new Size(28, 23);
@@ -177,7 +191,7 @@
             // IntelligenceLabel
             // 
             IntelligenceLabel.AutoSize = true;
-            IntelligenceLabel.Location = new Point(32, 226);
+            IntelligenceLabel.Location = new Point(26, 140);
             IntelligenceLabel.Name = "IntelligenceLabel";
             IntelligenceLabel.Size = new Size(71, 15);
             IntelligenceLabel.TabIndex = 11;
@@ -186,7 +200,7 @@
             // StaminaTextBox
             // 
             StaminaTextBox.Enabled = false;
-            StaminaTextBox.Location = new Point(109, 136);
+            StaminaTextBox.Location = new Point(103, 50);
             StaminaTextBox.MaxLength = 3;
             StaminaTextBox.Name = "StaminaTextBox";
             StaminaTextBox.Size = new Size(28, 23);
@@ -195,7 +209,7 @@
             // StaminaLabel
             // 
             StaminaLabel.AutoSize = true;
-            StaminaLabel.Location = new Point(50, 139);
+            StaminaLabel.Location = new Point(44, 53);
             StaminaLabel.Name = "StaminaLabel";
             StaminaLabel.Size = new Size(53, 15);
             StaminaLabel.TabIndex = 13;
@@ -204,7 +218,7 @@
             // StrengthTextBox
             // 
             StrengthTextBox.Enabled = false;
-            StrengthTextBox.Location = new Point(109, 107);
+            StrengthTextBox.Location = new Point(103, 22);
             StrengthTextBox.MaxLength = 3;
             StrengthTextBox.Name = "StrengthTextBox";
             StrengthTextBox.Size = new Size(28, 23);
@@ -213,7 +227,7 @@
             // StrengthLabel
             // 
             StrengthLabel.AutoSize = true;
-            StrengthLabel.Location = new Point(48, 110);
+            StrengthLabel.Location = new Point(42, 24);
             StrengthLabel.Name = "StrengthLabel";
             StrengthLabel.Size = new Size(55, 15);
             StrengthLabel.TabIndex = 15;
@@ -222,7 +236,7 @@
             // WisdomTextBox
             // 
             WisdomTextBox.Enabled = false;
-            WisdomTextBox.Location = new Point(109, 252);
+            WisdomTextBox.Location = new Point(103, 166);
             WisdomTextBox.MaxLength = 3;
             WisdomTextBox.Name = "WisdomTextBox";
             WisdomTextBox.Size = new Size(28, 23);
@@ -231,7 +245,7 @@
             // WisdomLabel
             // 
             WisdomLabel.AutoSize = true;
-            WisdomLabel.Location = new Point(49, 255);
+            WisdomLabel.Location = new Point(43, 169);
             WisdomLabel.Name = "WisdomLabel";
             WisdomLabel.Size = new Size(54, 15);
             WisdomLabel.TabIndex = 17;
@@ -240,7 +254,7 @@
             // FreeStatPointsTextBox
             // 
             FreeStatPointsTextBox.Enabled = false;
-            FreeStatPointsTextBox.Location = new Point(109, 310);
+            FreeStatPointsTextBox.Location = new Point(103, 244);
             FreeStatPointsTextBox.MaxLength = 3;
             FreeStatPointsTextBox.Name = "FreeStatPointsTextBox";
             FreeStatPointsTextBox.Size = new Size(28, 23);
@@ -249,30 +263,150 @@
             // FreeStatPointsLabel
             // 
             FreeStatPointsLabel.AutoSize = true;
-            FreeStatPointsLabel.Location = new Point(12, 313);
+            FreeStatPointsLabel.Location = new Point(6, 247);
             FreeStatPointsLabel.Name = "FreeStatPointsLabel";
             FreeStatPointsLabel.Size = new Size(91, 15);
             FreeStatPointsLabel.TabIndex = 19;
             FreeStatPointsLabel.Text = "Free Stat Points:";
             // 
-            // AbilityTypeListBox
+            // GoldTextBox
             // 
-            AbilityTypeListBox.FormattingEnabled = true;
-            AbilityTypeListBox.ItemHeight = 15;
-            AbilityTypeListBox.Location = new Point(48, 399);
-            AbilityTypeListBox.Name = "AbilityTypeListBox";
-            AbilityTypeListBox.Size = new Size(114, 199);
-            AbilityTypeListBox.TabIndex = 0;
-            AbilityTypeListBox.SelectedIndexChanged += AbilityTypeListBox_SelectedIndexChanged;
+            GoldTextBox.Enabled = false;
+            GoldTextBox.Location = new Point(61, 22);
+            GoldTextBox.MaxLength = 10;
+            GoldTextBox.Name = "GoldTextBox";
+            GoldTextBox.Size = new Size(138, 23);
+            GoldTextBox.TabIndex = 31;
             // 
-            // AbilitySubtypeListBox
+            // GoldLabel
             // 
-            AbilitySubtypeListBox.FormattingEnabled = true;
-            AbilitySubtypeListBox.ItemHeight = 15;
-            AbilitySubtypeListBox.Location = new Point(168, 399);
-            AbilitySubtypeListBox.Name = "AbilitySubtypeListBox";
-            AbilitySubtypeListBox.Size = new Size(118, 199);
-            AbilitySubtypeListBox.TabIndex = 21;
+            GoldLabel.AutoSize = true;
+            GoldLabel.Location = new Point(20, 25);
+            GoldLabel.Name = "GoldLabel";
+            GoldLabel.Size = new Size(35, 15);
+            GoldLabel.TabIndex = 30;
+            GoldLabel.Text = "Gold:";
+            // 
+            // SilverTextBox
+            // 
+            SilverTextBox.Enabled = false;
+            SilverTextBox.Location = new Point(61, 51);
+            SilverTextBox.MaxLength = 10;
+            SilverTextBox.Name = "SilverTextBox";
+            SilverTextBox.Size = new Size(138, 23);
+            SilverTextBox.TabIndex = 33;
+            // 
+            // SilverLabel
+            // 
+            SilverLabel.AutoSize = true;
+            SilverLabel.Location = new Point(17, 54);
+            SilverLabel.Name = "SilverLabel";
+            SilverLabel.Size = new Size(38, 15);
+            SilverLabel.TabIndex = 32;
+            SilverLabel.Text = "Silver:";
+            // 
+            // CopperTextBox
+            // 
+            CopperTextBox.Enabled = false;
+            CopperTextBox.Location = new Point(61, 80);
+            CopperTextBox.MaxLength = 10;
+            CopperTextBox.Name = "CopperTextBox";
+            CopperTextBox.Size = new Size(138, 23);
+            CopperTextBox.TabIndex = 35;
+            // 
+            // CopperLabel
+            // 
+            CopperLabel.AutoSize = true;
+            CopperLabel.Location = new Point(6, 83);
+            CopperLabel.Name = "CopperLabel";
+            CopperLabel.Size = new Size(49, 15);
+            CopperLabel.TabIndex = 34;
+            CopperLabel.Text = "Copper:";
+            // 
+            // AbilitiesGroupBox
+            // 
+            AbilitiesGroupBox.BackColor = Color.Black;
+            AbilitiesGroupBox.Controls.Add(FreeAbilityPointsTextBox);
+            AbilitiesGroupBox.Controls.Add(FreeAbilityPointsLabel);
+            AbilitiesGroupBox.Controls.Add(AbilityLevelLabel);
+            AbilitiesGroupBox.Controls.Add(AbilitySubtypeLabel);
+            AbilitiesGroupBox.Controls.Add(AbilityTypeLabel);
+            AbilitiesGroupBox.Controls.Add(AbilitySlotLabel);
+            AbilitiesGroupBox.Controls.Add(AbilityLevelListBox);
+            AbilitiesGroupBox.Controls.Add(AbilitySlotListBox);
+            AbilitiesGroupBox.Controls.Add(AbilitySubtypeListBox);
+            AbilitiesGroupBox.Controls.Add(AbilityTypeListBox);
+            AbilitiesGroupBox.ForeColor = Color.White;
+            AbilitiesGroupBox.Location = new Point(12, 325);
+            AbilitiesGroupBox.Name = "AbilitiesGroupBox";
+            AbilitiesGroupBox.Size = new Size(348, 277);
+            AbilitiesGroupBox.TabIndex = 36;
+            AbilitiesGroupBox.TabStop = false;
+            AbilitiesGroupBox.Text = "Abilities:";
+            // 
+            // FreeAbilityPointsTextBox
+            // 
+            FreeAbilityPointsTextBox.Enabled = false;
+            FreeAbilityPointsTextBox.Location = new Point(117, 242);
+            FreeAbilityPointsTextBox.MaxLength = 3;
+            FreeAbilityPointsTextBox.Name = "FreeAbilityPointsTextBox";
+            FreeAbilityPointsTextBox.Size = new Size(28, 23);
+            FreeAbilityPointsTextBox.TabIndex = 39;
+            // 
+            // FreeAbilityPointsLabel
+            // 
+            FreeAbilityPointsLabel.AutoSize = true;
+            FreeAbilityPointsLabel.Location = new Point(6, 245);
+            FreeAbilityPointsLabel.Name = "FreeAbilityPointsLabel";
+            FreeAbilityPointsLabel.Size = new Size(105, 15);
+            FreeAbilityPointsLabel.TabIndex = 38;
+            FreeAbilityPointsLabel.Text = "Free Ability Points:";
+            // 
+            // AbilityLevelLabel
+            // 
+            AbilityLevelLabel.AutoSize = true;
+            AbilityLevelLabel.Location = new Point(286, 19);
+            AbilityLevelLabel.Name = "AbilityLevelLabel";
+            AbilityLevelLabel.Size = new Size(37, 15);
+            AbilityLevelLabel.TabIndex = 37;
+            AbilityLevelLabel.Text = "Level:";
+            // 
+            // AbilitySubtypeLabel
+            // 
+            AbilitySubtypeLabel.AutoSize = true;
+            AbilitySubtypeLabel.Location = new Point(162, 19);
+            AbilitySubtypeLabel.Name = "AbilitySubtypeLabel";
+            AbilitySubtypeLabel.Size = new Size(53, 15);
+            AbilitySubtypeLabel.TabIndex = 36;
+            AbilitySubtypeLabel.Text = "Subtype:";
+            // 
+            // AbilityTypeLabel
+            // 
+            AbilityTypeLabel.AutoSize = true;
+            AbilityTypeLabel.Location = new Point(42, 19);
+            AbilityTypeLabel.Name = "AbilityTypeLabel";
+            AbilityTypeLabel.Size = new Size(34, 15);
+            AbilityTypeLabel.TabIndex = 35;
+            AbilityTypeLabel.Text = "Type:";
+            // 
+            // AbilitySlotLabel
+            // 
+            AbilitySlotLabel.AutoSize = true;
+            AbilitySlotLabel.Location = new Point(6, 19);
+            AbilitySlotLabel.Name = "AbilitySlotLabel";
+            AbilitySlotLabel.Size = new Size(30, 15);
+            AbilitySlotLabel.TabIndex = 34;
+            AbilitySlotLabel.Text = "Slot:";
+            // 
+            // AbilityLevelListBox
+            // 
+            AbilityLevelListBox.Enabled = false;
+            AbilityLevelListBox.FormattingEnabled = true;
+            AbilityLevelListBox.ItemHeight = 15;
+            AbilityLevelListBox.Location = new Point(286, 37);
+            AbilityLevelListBox.Name = "AbilityLevelListBox";
+            AbilityLevelListBox.Size = new Size(44, 199);
+            AbilityLevelListBox.TabIndex = 33;
             // 
             // AbilitySlotListBox
             // 
@@ -280,125 +414,207 @@
             AbilitySlotListBox.FormattingEnabled = true;
             AbilitySlotListBox.ItemHeight = 15;
             AbilitySlotListBox.Items.AddRange(new object[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" });
-            AbilitySlotListBox.Location = new Point(12, 399);
+            AbilitySlotListBox.Location = new Point(6, 37);
             AbilitySlotListBox.Name = "AbilitySlotListBox";
             AbilitySlotListBox.Size = new Size(30, 199);
-            AbilitySlotListBox.TabIndex = 22;
+            AbilitySlotListBox.TabIndex = 32;
             AbilitySlotListBox.SelectedIndexChanged += AbilitySlotListBox_SelectedIndexChanged;
             // 
-            // AbilityLevelListBox
+            // AbilitySubtypeListBox
             // 
-            AbilityLevelListBox.Enabled = false;
-            AbilityLevelListBox.FormattingEnabled = true;
-            AbilityLevelListBox.ItemHeight = 15;
-            AbilityLevelListBox.Location = new Point(292, 399);
-            AbilityLevelListBox.Name = "AbilityLevelListBox";
-            AbilityLevelListBox.Size = new Size(44, 199);
-            AbilityLevelListBox.TabIndex = 23;
+            AbilitySubtypeListBox.FormattingEnabled = true;
+            AbilitySubtypeListBox.ItemHeight = 15;
+            AbilitySubtypeListBox.Location = new Point(162, 37);
+            AbilitySubtypeListBox.Name = "AbilitySubtypeListBox";
+            AbilitySubtypeListBox.Size = new Size(118, 199);
+            AbilitySubtypeListBox.TabIndex = 31;
             // 
-            // AbilitySlotLabel
+            // AbilityTypeListBox
             // 
-            AbilitySlotLabel.AutoSize = true;
-            AbilitySlotLabel.Location = new Point(12, 381);
-            AbilitySlotLabel.Name = "AbilitySlotLabel";
-            AbilitySlotLabel.Size = new Size(30, 15);
-            AbilitySlotLabel.TabIndex = 24;
-            AbilitySlotLabel.Text = "Slot:";
+            AbilityTypeListBox.FormattingEnabled = true;
+            AbilityTypeListBox.ItemHeight = 15;
+            AbilityTypeListBox.Location = new Point(42, 37);
+            AbilityTypeListBox.Name = "AbilityTypeListBox";
+            AbilityTypeListBox.Size = new Size(114, 199);
+            AbilityTypeListBox.TabIndex = 30;
+            AbilityTypeListBox.SelectedIndexChanged += AbilityTypeListBox_SelectedIndexChanged;
             // 
-            // AbilityTypeLabel
+            // StatPointsGroupBox
             // 
-            AbilityTypeLabel.AutoSize = true;
-            AbilityTypeLabel.Location = new Point(48, 381);
-            AbilityTypeLabel.Name = "AbilityTypeLabel";
-            AbilityTypeLabel.Size = new Size(34, 15);
-            AbilityTypeLabel.TabIndex = 25;
-            AbilityTypeLabel.Text = "Type:";
+            StatPointsGroupBox.Controls.Add(StrengthTextBox);
+            StatPointsGroupBox.Controls.Add(AgilityLabel);
+            StatPointsGroupBox.Controls.Add(AgilityTextBox);
+            StatPointsGroupBox.Controls.Add(CharismaLabel);
+            StatPointsGroupBox.Controls.Add(CharismaTextBox);
+            StatPointsGroupBox.Controls.Add(DexterityLabel);
+            StatPointsGroupBox.Controls.Add(DexterityTextBox);
+            StatPointsGroupBox.Controls.Add(IntelligenceLabel);
+            StatPointsGroupBox.Controls.Add(FreeStatPointsTextBox);
+            StatPointsGroupBox.Controls.Add(IntelligenceTextBox);
+            StatPointsGroupBox.Controls.Add(FreeStatPointsLabel);
+            StatPointsGroupBox.Controls.Add(StaminaLabel);
+            StatPointsGroupBox.Controls.Add(WisdomTextBox);
+            StatPointsGroupBox.Controls.Add(StaminaTextBox);
+            StatPointsGroupBox.Controls.Add(WisdomLabel);
+            StatPointsGroupBox.Controls.Add(StrengthLabel);
+            StatPointsGroupBox.ForeColor = Color.White;
+            StatPointsGroupBox.Location = new Point(223, 41);
+            StatPointsGroupBox.Name = "StatPointsGroupBox";
+            StatPointsGroupBox.Size = new Size(137, 278);
+            StatPointsGroupBox.TabIndex = 37;
+            StatPointsGroupBox.TabStop = false;
+            StatPointsGroupBox.Text = "Stat points:";
             // 
-            // AbilitySubtypeLabel
+            // MoneyGroupBox
             // 
-            AbilitySubtypeLabel.AutoSize = true;
-            AbilitySubtypeLabel.Location = new Point(168, 381);
-            AbilitySubtypeLabel.Name = "AbilitySubtypeLabel";
-            AbilitySubtypeLabel.Size = new Size(53, 15);
-            AbilitySubtypeLabel.TabIndex = 26;
-            AbilitySubtypeLabel.Text = "Subtype:";
+            MoneyGroupBox.Controls.Add(GoldTextBox);
+            MoneyGroupBox.Controls.Add(GoldLabel);
+            MoneyGroupBox.Controls.Add(SilverLabel);
+            MoneyGroupBox.Controls.Add(CopperTextBox);
+            MoneyGroupBox.Controls.Add(SilverTextBox);
+            MoneyGroupBox.Controls.Add(CopperLabel);
+            MoneyGroupBox.ForeColor = Color.White;
+            MoneyGroupBox.Location = new Point(12, 210);
+            MoneyGroupBox.Name = "MoneyGroupBox";
+            MoneyGroupBox.Size = new Size(205, 109);
+            MoneyGroupBox.TabIndex = 38;
+            MoneyGroupBox.TabStop = false;
+            MoneyGroupBox.Text = "Money:";
             // 
-            // AbilityLevelLabel
+            // LevelGroupBox
             // 
-            AbilityLevelLabel.AutoSize = true;
-            AbilityLevelLabel.Location = new Point(292, 381);
-            AbilityLevelLabel.Name = "AbilityLevelLabel";
-            AbilityLevelLabel.Size = new Size(37, 15);
-            AbilityLevelLabel.TabIndex = 27;
-            AbilityLevelLabel.Text = "Level:";
+            LevelGroupBox.Controls.Add(LevelProgressTrackBar);
+            LevelGroupBox.Controls.Add(LevelTextBox);
+            LevelGroupBox.ForeColor = Color.White;
+            LevelGroupBox.Location = new Point(12, 129);
+            LevelGroupBox.Name = "LevelGroupBox";
+            LevelGroupBox.Size = new Size(205, 73);
+            LevelGroupBox.TabIndex = 39;
+            LevelGroupBox.TabStop = false;
+            LevelGroupBox.Text = "Level:";
             // 
-            // FreeAbilityPointsTextBox
+            // AvatarInfoGroupBox
             // 
-            FreeAbilityPointsTextBox.Enabled = false;
-            FreeAbilityPointsTextBox.Location = new Point(123, 604);
-            FreeAbilityPointsTextBox.MaxLength = 3;
-            FreeAbilityPointsTextBox.Name = "FreeAbilityPointsTextBox";
-            FreeAbilityPointsTextBox.Size = new Size(28, 23);
-            FreeAbilityPointsTextBox.TabIndex = 29;
+            AvatarInfoGroupBox.Controls.Add(SaveDateContentLabel);
+            AvatarInfoGroupBox.Controls.Add(AvatarModelContentLabel);
+            AvatarInfoGroupBox.Controls.Add(AvatarModelLabel);
+            AvatarInfoGroupBox.Controls.Add(SaveDateLabel);
+            AvatarInfoGroupBox.Controls.Add(AvatarSexContentLabel);
+            AvatarInfoGroupBox.Controls.Add(AvatarSexLabel);
+            AvatarInfoGroupBox.Controls.Add(AvatarNameContentLabel);
+            AvatarInfoGroupBox.Controls.Add(AvatarNameLabel);
+            AvatarInfoGroupBox.ForeColor = Color.White;
+            AvatarInfoGroupBox.Location = new Point(12, 41);
+            AvatarInfoGroupBox.Name = "AvatarInfoGroupBox";
+            AvatarInfoGroupBox.Size = new Size(205, 82);
+            AvatarInfoGroupBox.TabIndex = 40;
+            AvatarInfoGroupBox.TabStop = false;
+            AvatarInfoGroupBox.Text = "Avatar Info:";
             // 
-            // FreeAbilityPointsLabel
+            // SaveDateContentLabel
             // 
-            FreeAbilityPointsLabel.AutoSize = true;
-            FreeAbilityPointsLabel.Location = new Point(12, 607);
-            FreeAbilityPointsLabel.Name = "FreeAbilityPointsLabel";
-            FreeAbilityPointsLabel.Size = new Size(105, 15);
-            FreeAbilityPointsLabel.TabIndex = 28;
-            FreeAbilityPointsLabel.Text = "Free Ability Points:";
+            SaveDateContentLabel.AutoSize = true;
+            SaveDateContentLabel.Location = new Point(73, 64);
+            SaveDateContentLabel.Name = "SaveDateContentLabel";
+            SaveDateContentLabel.Size = new Size(0, 15);
+            SaveDateContentLabel.TabIndex = 48;
+            // 
+            // AvatarModelContentLabel
+            // 
+            AvatarModelContentLabel.AutoSize = true;
+            AvatarModelContentLabel.Location = new Point(73, 49);
+            AvatarModelContentLabel.Name = "AvatarModelContentLabel";
+            AvatarModelContentLabel.Size = new Size(0, 15);
+            AvatarModelContentLabel.TabIndex = 47;
+            // 
+            // AvatarModelLabel
+            // 
+            AvatarModelLabel.AutoSize = true;
+            AvatarModelLabel.Location = new Point(6, 49);
+            AvatarModelLabel.Name = "AvatarModelLabel";
+            AvatarModelLabel.Size = new Size(44, 15);
+            AvatarModelLabel.TabIndex = 46;
+            AvatarModelLabel.Text = "Model:";
+            // 
+            // SaveDateLabel
+            // 
+            SaveDateLabel.AutoSize = true;
+            SaveDateLabel.Location = new Point(6, 64);
+            SaveDateLabel.Name = "SaveDateLabel";
+            SaveDateLabel.Size = new Size(61, 15);
+            SaveDateLabel.TabIndex = 45;
+            SaveDateLabel.Text = "Save Date:";
+            // 
+            // AvatarSexContentLabel
+            // 
+            AvatarSexContentLabel.AutoSize = true;
+            AvatarSexContentLabel.Location = new Point(73, 34);
+            AvatarSexContentLabel.Name = "AvatarSexContentLabel";
+            AvatarSexContentLabel.Size = new Size(0, 15);
+            AvatarSexContentLabel.TabIndex = 44;
+            // 
+            // AvatarSexLabel
+            // 
+            AvatarSexLabel.AutoSize = true;
+            AvatarSexLabel.Location = new Point(6, 34);
+            AvatarSexLabel.Name = "AvatarSexLabel";
+            AvatarSexLabel.Size = new Size(28, 15);
+            AvatarSexLabel.TabIndex = 43;
+            AvatarSexLabel.Text = "Sex:";
+            // 
+            // AvatarNameContentLabel
+            // 
+            AvatarNameContentLabel.AutoSize = true;
+            AvatarNameContentLabel.Location = new Point(73, 19);
+            AvatarNameContentLabel.Name = "AvatarNameContentLabel";
+            AvatarNameContentLabel.Size = new Size(0, 15);
+            AvatarNameContentLabel.TabIndex = 42;
+            // 
+            // AvatarNameLabel
+            // 
+            AvatarNameLabel.AutoSize = true;
+            AvatarNameLabel.Location = new Point(6, 19);
+            AvatarNameLabel.Name = "AvatarNameLabel";
+            AvatarNameLabel.Size = new Size(42, 15);
+            AvatarNameLabel.TabIndex = 41;
+            AvatarNameLabel.Text = "Name:";
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
-            ClientSize = new Size(348, 638);
-            Controls.Add(FreeAbilityPointsTextBox);
-            Controls.Add(FreeAbilityPointsLabel);
-            Controls.Add(AbilityLevelLabel);
-            Controls.Add(AbilitySubtypeLabel);
-            Controls.Add(AbilityTypeLabel);
-            Controls.Add(AbilitySlotLabel);
-            Controls.Add(AbilityLevelListBox);
-            Controls.Add(AbilitySlotListBox);
-            Controls.Add(AbilitySubtypeListBox);
-            Controls.Add(AbilityTypeListBox);
-            Controls.Add(FreeStatPointsTextBox);
-            Controls.Add(FreeStatPointsLabel);
-            Controls.Add(WisdomTextBox);
-            Controls.Add(WisdomLabel);
-            Controls.Add(StrengthTextBox);
-            Controls.Add(StrengthLabel);
-            Controls.Add(StaminaTextBox);
-            Controls.Add(StaminaLabel);
-            Controls.Add(IntelligenceTextBox);
-            Controls.Add(IntelligenceLabel);
-            Controls.Add(DexterityTextBox);
-            Controls.Add(DexterityLabel);
-            Controls.Add(CharismaTextBox);
-            Controls.Add(CharismaLabel);
-            Controls.Add(AgilityTextBox);
-            Controls.Add(AgilityLabel);
-            Controls.Add(LevelProgressTrackBar);
-            Controls.Add(LevelTextBox);
-            Controls.Add(LevelLabel);
+            ClientSize = new Size(372, 614);
+            Controls.Add(AvatarInfoGroupBox);
+            Controls.Add(LevelGroupBox);
+            Controls.Add(MoneyGroupBox);
+            Controls.Add(StatPointsGroupBox);
+            Controls.Add(AbilitiesGroupBox);
             Controls.Add(OpenFileButton);
             ForeColor = Color.White;
+            MaximizeBox = false;
+            MaximumSize = new Size(388, 653);
+            MinimumSize = new Size(388, 653);
             Name = "MainForm";
             Text = "SpellForce Freegame Save Editor";
             ((System.ComponentModel.ISupportInitialize)LevelProgressTrackBar).EndInit();
+            AbilitiesGroupBox.ResumeLayout(false);
+            AbilitiesGroupBox.PerformLayout();
+            StatPointsGroupBox.ResumeLayout(false);
+            StatPointsGroupBox.PerformLayout();
+            MoneyGroupBox.ResumeLayout(false);
+            MoneyGroupBox.PerformLayout();
+            LevelGroupBox.ResumeLayout(false);
+            LevelGroupBox.PerformLayout();
+            AvatarInfoGroupBox.ResumeLayout(false);
+            AvatarInfoGroupBox.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private OpenFileDialog OpenFileDialog;
         private Button OpenFileButton;
-        private Label LevelLabel;
         private TextBox LevelTextBox;
         private TrackBar LevelProgressTrackBar;
         private Label AgilityLabel;
@@ -417,15 +633,34 @@
         private Label WisdomLabel;
         private TextBox FreeStatPointsTextBox;
         private Label FreeStatPointsLabel;
-        private ListBox AbilityTypeListBox;
-        private ListBox AbilitySubtypeListBox;
-        private ListBox AbilitySlotListBox;
-        private ListBox AbilityLevelListBox;
-        private Label AbilitySlotLabel;
-        private Label AbilityTypeLabel;
-        private Label AbilitySubtypeLabel;
-        private Label AbilityLevelLabel;
+        private TextBox GoldTextBox;
+        private Label GoldLabel;
+        private TextBox SilverTextBox;
+        private Label SilverLabel;
+        private TextBox CopperTextBox;
+        private Label CopperLabel;
+        private GroupBox AbilitiesGroupBox;
         private TextBox FreeAbilityPointsTextBox;
         private Label FreeAbilityPointsLabel;
+        private Label AbilityLevelLabel;
+        private Label AbilitySubtypeLabel;
+        private Label AbilityTypeLabel;
+        private Label AbilitySlotLabel;
+        private ListBox AbilityLevelListBox;
+        private ListBox AbilitySlotListBox;
+        private ListBox AbilitySubtypeListBox;
+        private ListBox AbilityTypeListBox;
+        private GroupBox StatPointsGroupBox;
+        private GroupBox MoneyGroupBox;
+        private GroupBox LevelGroupBox;
+        private GroupBox AvatarInfoGroupBox;
+        private Label AvatarNameLabel;
+        private Label AvatarModelContentLabel;
+        private Label AvatarModelLabel;
+        private Label SaveDateLabel;
+        private Label AvatarSexContentLabel;
+        private Label AvatarSexLabel;
+        private Label AvatarNameContentLabel;
+        private Label SaveDateContentLabel;
     }
 }

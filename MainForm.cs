@@ -20,6 +20,12 @@ namespace SFSE
             FileStream saveFileStream = File.OpenRead(OpenFileDialog.FileName);
             Program.LoadedData = new SaveData(new SaveFile(saveFileStream).DecompressedChunks[0].Data);
 
+            AvatarNameContentLabel.Text = new String(Program.LoadedData.AvatarName);
+            AvatarSexContentLabel.Text = Program.LoadedData.AvatarSex == 1 ? "Female" : "Male";
+            AvatarModelContentLabel.Text = Program.LoadedData.AvatarModel.ToString();
+            DateTime SaveTimestamp = new DateTime(1970, 1, 1).AddSeconds(Program.LoadedData.Timestamp);
+            SaveDateContentLabel.Text = SaveTimestamp.ToString();
+
             LevelTextBox.Enabled = true;
             LevelTextBox.Text = Convert.ToString(Program.LoadedData.AvatarLevel);
 
@@ -66,6 +72,15 @@ namespace SFSE
 
             FreeAbilityPointsTextBox.Enabled = true;
             FreeAbilityPointsTextBox.Text = Program.LoadedData.AvatarFreeAbilityPoints.ToString();
+
+            GoldTextBox.Enabled = true;
+            GoldTextBox.Text = Program.LoadedData.AvatarGold.ToString();
+
+            SilverTextBox.Enabled = true;
+            SilverTextBox.Text = Program.LoadedData.AvatarSilver.ToString();
+
+            CopperTextBox.Enabled = true;
+            CopperTextBox.Text = Program.LoadedData.AvatarCopper.ToString();
         }
 
         private void AbilitySlotListBox_SelectedIndexChanged(object sender, EventArgs e)
