@@ -114,7 +114,7 @@
             // AgilityLabel
             // 
             AgilityLabel.AutoSize = true;
-            AgilityLabel.Location = new Point(59, 110);
+            AgilityLabel.Location = new Point(59, 197);
             AgilityLabel.Name = "AgilityLabel";
             AgilityLabel.Size = new Size(44, 15);
             AgilityLabel.TabIndex = 5;
@@ -123,7 +123,7 @@
             // AgilityTextBox
             // 
             AgilityTextBox.Enabled = false;
-            AgilityTextBox.Location = new Point(109, 107);
+            AgilityTextBox.Location = new Point(109, 194);
             AgilityTextBox.MaxLength = 3;
             AgilityTextBox.Name = "AgilityTextBox";
             AgilityTextBox.Size = new Size(28, 23);
@@ -132,7 +132,7 @@
             // CharismaTextBox
             // 
             CharismaTextBox.Enabled = false;
-            CharismaTextBox.Location = new Point(109, 136);
+            CharismaTextBox.Location = new Point(109, 281);
             CharismaTextBox.MaxLength = 3;
             CharismaTextBox.Name = "CharismaTextBox";
             CharismaTextBox.Size = new Size(28, 23);
@@ -141,7 +141,7 @@
             // CharismaLabel
             // 
             CharismaLabel.AutoSize = true;
-            CharismaLabel.Location = new Point(43, 139);
+            CharismaLabel.Location = new Point(43, 284);
             CharismaLabel.Name = "CharismaLabel";
             CharismaLabel.Size = new Size(60, 15);
             CharismaLabel.TabIndex = 7;
@@ -168,7 +168,7 @@
             // IntelligenceTextBox
             // 
             IntelligenceTextBox.Enabled = false;
-            IntelligenceTextBox.Location = new Point(109, 194);
+            IntelligenceTextBox.Location = new Point(109, 223);
             IntelligenceTextBox.MaxLength = 3;
             IntelligenceTextBox.Name = "IntelligenceTextBox";
             IntelligenceTextBox.Size = new Size(28, 23);
@@ -177,7 +177,7 @@
             // IntelligenceLabel
             // 
             IntelligenceLabel.AutoSize = true;
-            IntelligenceLabel.Location = new Point(32, 197);
+            IntelligenceLabel.Location = new Point(32, 226);
             IntelligenceLabel.Name = "IntelligenceLabel";
             IntelligenceLabel.Size = new Size(71, 15);
             IntelligenceLabel.TabIndex = 11;
@@ -186,7 +186,7 @@
             // StaminaTextBox
             // 
             StaminaTextBox.Enabled = false;
-            StaminaTextBox.Location = new Point(109, 223);
+            StaminaTextBox.Location = new Point(109, 136);
             StaminaTextBox.MaxLength = 3;
             StaminaTextBox.Name = "StaminaTextBox";
             StaminaTextBox.Size = new Size(28, 23);
@@ -195,7 +195,7 @@
             // StaminaLabel
             // 
             StaminaLabel.AutoSize = true;
-            StaminaLabel.Location = new Point(50, 226);
+            StaminaLabel.Location = new Point(50, 139);
             StaminaLabel.Name = "StaminaLabel";
             StaminaLabel.Size = new Size(53, 15);
             StaminaLabel.TabIndex = 13;
@@ -204,7 +204,7 @@
             // StrengthTextBox
             // 
             StrengthTextBox.Enabled = false;
-            StrengthTextBox.Location = new Point(109, 252);
+            StrengthTextBox.Location = new Point(109, 107);
             StrengthTextBox.MaxLength = 3;
             StrengthTextBox.Name = "StrengthTextBox";
             StrengthTextBox.Size = new Size(28, 23);
@@ -213,7 +213,7 @@
             // StrengthLabel
             // 
             StrengthLabel.AutoSize = true;
-            StrengthLabel.Location = new Point(48, 255);
+            StrengthLabel.Location = new Point(48, 110);
             StrengthLabel.Name = "StrengthLabel";
             StrengthLabel.Size = new Size(55, 15);
             StrengthLabel.TabIndex = 15;
@@ -222,7 +222,7 @@
             // WisdomTextBox
             // 
             WisdomTextBox.Enabled = false;
-            WisdomTextBox.Location = new Point(109, 281);
+            WisdomTextBox.Location = new Point(109, 252);
             WisdomTextBox.MaxLength = 3;
             WisdomTextBox.Name = "WisdomTextBox";
             WisdomTextBox.Size = new Size(28, 23);
@@ -231,7 +231,7 @@
             // WisdomLabel
             // 
             WisdomLabel.AutoSize = true;
-            WisdomLabel.Location = new Point(49, 284);
+            WisdomLabel.Location = new Point(49, 255);
             WisdomLabel.Name = "WisdomLabel";
             WisdomLabel.Size = new Size(54, 15);
             WisdomLabel.TabIndex = 17;
