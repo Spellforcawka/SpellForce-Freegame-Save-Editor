@@ -29,7 +29,7 @@ namespace SFSE
         {
             byte[] rawHeader = new byte[HeaderSize];
             fileStream.ReadExactly(rawHeader);
-            Header = Helpers.DeserializeValueType<CompressedChunkHeader>(rawHeader);
+            Header = Program.DeserializeValueType<CompressedChunkHeader>(rawHeader);
             Data = new Byte[Header.CompressedSize];
             fileStream.ReadExactly(Data);
         }

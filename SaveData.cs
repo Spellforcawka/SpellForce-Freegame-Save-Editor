@@ -9,86 +9,10 @@ using System.Windows.Forms.VisualStyles;
 namespace SFSE
 {
 
-    public enum AbilityType : Byte
-    {
-        LightCombatArts = 1,
-        HeavyCombatArts,
-        RangedCombatArts,
-        WhiteMagic,
-        ElementalMagic,
-        MindMagic,
-        BlackMagic,
-        Empty = 255,
-    }
-
-    public enum LightCombatArtsSubtype : Byte
-    {
-        None,
-        PiercingWeapons,
-        LightBladeWeapons,
-        LightBluntWeapons,
-        LightArmor,
-        Empty = 255,
-    }
-
-    public enum HeavyCombatArtsSubtype : Byte
-    {
-        None,
-        HeavyBladeWeapons,
-        HeavyBluntWeapons,
-        HeavyArmor,
-        Shields,
-        Empty = 255,
-    }
-
-    public enum RangedCombatArtsSubtype : Byte
-    {
-        None = 0,
-        Bows,
-        Crossbows,
-        Empty,
-    }
-
-    public enum WhiteMagicSubtype : Byte
-    {
-        None,
-        Life,
-        Nature,
-        Boons,
-        Empty,
-    }
-
-    public enum ElementalMagicSubtype : Byte
-    {
-        None,
-        Fire,
-        Ice,
-        Earth,
-        Empty = 255,
-    }
-
-    public enum MindMagicSubtype : Byte
-    {
-        None,
-        Offensive,
-        Defensive,
-        Enchantment,
-        Empty = 255,
-    }
-
-    public enum BlackMagicSubtype : Byte
-    {
-        None,
-        Death,
-        Necromancy,
-        Curses,
-        Empty = 255,
-    }
-
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct Ability
     {
-        public AbilityType Type;
+        public Byte Type;
         public Byte SubType;
         public Byte Level;
     }
@@ -275,7 +199,7 @@ namespace SFSE
             {
                 AvatarAbilities[i] = new Ability();
                 stream.ReadExactly(buffer1);
-                AvatarAbilities[i].Type = (AbilityType) buffer1[0];
+                AvatarAbilities[i].Type = buffer1[0];
                 stream.ReadExactly(buffer1);
                 AvatarAbilities[i].SubType = buffer1[0];
                 stream.ReadExactly(buffer1);
@@ -338,7 +262,7 @@ namespace SFSE
             {
                 Byte[] buffer = new Byte[10];
                 stream.ReadAtLeast(buffer, 10, false);
-                Items[i] = Helpers.DeserializeValueType<Item>(buffer);
+                Items[i] = Program.DeserializeValueType<Item>(buffer);
             }
         }
     }
