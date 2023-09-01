@@ -414,7 +414,6 @@
             AbilitySlotListBox.Enabled = false;
             AbilitySlotListBox.FormattingEnabled = true;
             AbilitySlotListBox.ItemHeight = 15;
-            AbilitySlotListBox.Items.AddRange(new object[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" });
             AbilitySlotListBox.Location = new Point(6, 37);
             AbilitySlotListBox.Name = "AbilitySlotListBox";
             AbilitySlotListBox.Size = new Size(30, 199);

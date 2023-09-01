@@ -59,6 +59,7 @@ namespace SFSE
             FreeStatPointsTextBox.Text = Program.LoadedData.AvatarFreeStatPoints.ToString();
 
             AbilitySlotListBox.Enabled = true;
+            AbilitySlotListBox.Items.AddRange(new object[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" });
             AbilitySlotListBox.SelectedIndex = 0;
 
             AbilityTypeListBox.Enabled = true;
