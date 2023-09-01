@@ -77,6 +77,7 @@
             AvatarSexLabel = new Label();
             AvatarNameContentLabel = new Label();
             AvatarNameLabel = new Label();
+            ValidateAvatarButton = new Button();
             ((System.ComponentModel.ISupportInitialize)LevelProgressTrackBar).BeginInit();
             AbilitiesGroupBox.SuspendLayout();
             StatPointsGroupBox.SuspendLayout();
@@ -579,12 +580,25 @@
             AvatarNameLabel.TabIndex = 41;
             AvatarNameLabel.Text = "Name:";
             // 
+            // ValidateAvatarButton
+            // 
+            ValidateAvatarButton.Enabled = false;
+            ValidateAvatarButton.ForeColor = Color.Black;
+            ValidateAvatarButton.Location = new Point(116, 12);
+            ValidateAvatarButton.Name = "ValidateAvatarButton";
+            ValidateAvatarButton.Size = new Size(101, 23);
+            ValidateAvatarButton.TabIndex = 41;
+            ValidateAvatarButton.Text = "Validate Avatar";
+            ValidateAvatarButton.UseVisualStyleBackColor = true;
+            ValidateAvatarButton.Click += ValidateAvatarButton_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(372, 614);
+            Controls.Add(ValidateAvatarButton);
             Controls.Add(AvatarInfoGroupBox);
             Controls.Add(LevelGroupBox);
             Controls.Add(MoneyGroupBox);
@@ -662,5 +676,6 @@
         private Label AvatarSexLabel;
         private Label AvatarNameContentLabel;
         private Label SaveDateContentLabel;
+        private Button ValidateAvatarButton;
     }
 }

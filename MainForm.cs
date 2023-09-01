@@ -20,6 +20,8 @@ namespace SFSE
             FileStream saveFileStream = File.OpenRead(OpenFileDialog.FileName);
             Program.LoadedData = new SaveData(new SaveFile(saveFileStream).DecompressedChunks[0].Data);
 
+            ValidateAvatarButton.Enabled = true;
+
             AvatarNameContentLabel.Text = new String(Program.LoadedData.AvatarName);
             AvatarSexContentLabel.Text = Program.LoadedData.AvatarSex == 1 ? "Female" : "Male";
             AvatarModelContentLabel.Text = Program.LoadedData.AvatarModel.ToString();
@@ -94,5 +96,64 @@ namespace SFSE
         {
             Program.UpdateSubtypeChoices(AbilityTypeListBox, AbilitySubtypeListBox);
         }
+
+        private void ValidateAvatarButton_Click(object sender, EventArgs e)
+        {
+            var level = Program.LoadedData.AvatarLevel;
+
+            var stats = Program.LoadedData.AvatarAgility +
+                Program.LoadedData.AvatarCharisma +
+                Program.LoadedData.AvatarDexterity +
+                Program.LoadedData.AvatarIntelligence +
+                Program.LoadedData.AvatarStamina +
+                Program.LoadedData.AvatarStrength +
+                Program.LoadedData.AvatarWisdom +
+                Program.LoadedData.AvatarFreeStatPoints;
+
+            var abilities = 0;
+            for (var i = 0; i < 10; i++)
+            {
+                var abilityLevel = Program.LoadedData.AvatarAbilities[i].Level;
+                abilities += abilityLevel == 255 ? 0 : abilityLevel;
+            }
+            abilities += Program.LoadedData.AvatarFreeAbilityPoints;
+
+            var experience = Program.LoadedData.AvatarExperience;
+
+            if (experience < Experience.ForLevel[level] || experience > Experience.ForLevel[(byte)(level+1)])
+            {
+                MessageBox.Show(
+                    "Wrong experience value for current level! Play with the level progress slide; if the problem persists, report a bug!",
+                    "Wrong experience value!", 
+                    MessageBoxButtons.OK, 
+                    MessageBoxIcon.Error
+                    );
+            } else if (abilities != (2 * level))
+            {
+                MessageBox.Show(
+                    "Wrong ability points count for current level!\nExpected: " + (2 * level).ToString() + ", Got: " + abilities.ToString() + ".",
+                    "Wrong ability points count!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                    );
+            } else if (stats != (5 * (level - 1) + 205))
+            {
+                MessageBox.Show(
+                    "Wrong stat points count for current level!\nExpected: " + (5 * (level - 1) + 205).ToString() + ", Got: " + stats.ToString() + ".",
+                    "Wrong stat points count!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                    );
+            } else
+            {
+                MessageBox.Show(
+                    "All good!",
+                    "All good!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                    );
+            }
+        }
+
     }
 }
