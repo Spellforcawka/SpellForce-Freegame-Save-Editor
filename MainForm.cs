@@ -88,9 +88,10 @@ namespace SFSE
 
         private void AbilitySlotListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            AbilityTypeListBox.SelectedItem = (Program.AbilityType)Program.LoadedData.AvatarAbilities[AbilitySlotListBox.SelectedIndex].Type;
-            Program.UpdateSubtypeValue(AbilityTypeListBox, AbilitySubtypeListBox, Program.LoadedData.AvatarAbilities[AbilitySlotListBox.SelectedIndex].SubType);
-            AbilityLevelListBox.SelectedItem = (Program.AbilityLevel)Program.LoadedData.AvatarAbilities[AbilitySlotListBox.SelectedIndex].Level;
+            var slot = AbilitySlotListBox.SelectedIndex;
+            AbilityTypeListBox.SelectedItem = (Program.AbilityType)Program.LoadedData.AvatarAbilities[slot].Type;
+            Program.UpdateSubtypeValue(AbilityTypeListBox, AbilitySubtypeListBox, Program.LoadedData.AvatarAbilities[slot].SubType);
+            AbilityLevelListBox.SelectedItem = (Program.AbilityLevel)Program.LoadedData.AvatarAbilities[slot].Level;
         }
 
         private void AbilityTypeListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -115,21 +116,22 @@ namespace SFSE
             for (var i = 0; i < 10; i++)
             {
                 var abilityLevel = Program.LoadedData.AvatarAbilities[i].Level;
-                abilities += abilityLevel == 255 ? 0 : abilityLevel;
+                abilities += (abilityLevel == 255) ? 0 : abilityLevel;
             }
             abilities += Program.LoadedData.AvatarFreeAbilityPoints;
 
             var experience = Program.LoadedData.AvatarExperience;
 
-            if (experience < Experience.ForLevel[level] || experience > Experience.ForLevel[(byte)(level+1)])
+            if (experience < Experience.ForLevel[level] || experience > Experience.ForLevel[(byte)(level + 1)])
             {
                 MessageBox.Show(
                     "Wrong experience value for current level! Play with the level progress slide; if the problem persists, report a bug!",
-                    "Wrong experience value!", 
-                    MessageBoxButtons.OK, 
+                    "Wrong experience value!",
+                    MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                     );
-            } else if (abilities != (2 * level))
+            }
+            else if (abilities != (2 * level))
             {
                 MessageBox.Show(
                     "Wrong ability points count for current level!\nExpected: " + (2 * level).ToString() + ", Got: " + abilities.ToString() + ".",
@@ -137,7 +139,8 @@ namespace SFSE
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                     );
-            } else if (stats != (5 * (level - 1) + 205))
+            }
+            else if (stats != (5 * (level - 1) + 205))
             {
                 MessageBox.Show(
                     "Wrong stat points count for current level!\nExpected: " + (5 * (level - 1) + 205).ToString() + ", Got: " + stats.ToString() + ".",
@@ -145,7 +148,8 @@ namespace SFSE
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                     );
-            } else
+            }
+            else
             {
                 MessageBox.Show(
                     "All good!",
@@ -156,5 +160,204 @@ namespace SFSE
             }
         }
 
+        private void LevelTextBox_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                Byte level = Convert.ToByte(LevelTextBox.Text);
+                if (level > 50 || level < 1) throw new Exception();
+                Program.LoadedData.AvatarLevel = level;
+                Program.LoadedData.AvatarExperience = Experience.FromPercent(level, (byte)LevelProgressTrackBar.Value);
+            }
+            catch
+            {
+                MessageBox.Show("Please enter a number in a range [1, 50].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void LevelProgressTrackBar_Leave(object sender, EventArgs e)
+        {
+            Program.LoadedData.AvatarExperience = Experience.FromPercent(Program.LoadedData.AvatarLevel, (byte)LevelProgressTrackBar.Value);
+        }
+
+        private void GoldTextBox_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                Program.LoadedData.AvatarGold = Convert.ToInt32(GoldTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Please enter a number in a range [0, 2147483647].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void SilverTextBox_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                Program.LoadedData.AvatarSilver = Convert.ToInt32(SilverTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Please enter a number in a range [0, 2147483647].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void CopperTextBox_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                Program.LoadedData.AvatarCopper = Convert.ToInt32(CopperTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Please enter a number in a range [0, 2147483647].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void StrengthTextBox_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                Program.LoadedData.AvatarStrength = Convert.ToInt32(StrengthTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Please enter a number in a range [0, 2147483647].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void StaminaTextBox_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                Program.LoadedData.AvatarStamina = Convert.ToInt32(StaminaTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Please enter a number in a range [0, 2147483647].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void DexterityTextBox_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                Program.LoadedData.AvatarDexterity = Convert.ToInt32(DexterityTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Please enter a number in a range [0, 2147483647].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void AgilityTextBox_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                Program.LoadedData.AvatarAgility = Convert.ToInt32(AgilityTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Please enter a number in a range [0, 2147483647].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void IntelligenceTextBox_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                Program.LoadedData.AvatarIntelligence = Convert.ToInt32(IntelligenceTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Please enter a number in a range [0, 2147483647].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void WisdomTextBox_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                Program.LoadedData.AvatarWisdom = Convert.ToInt32(WisdomTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Please enter a number in a range [0, 2147483647].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void CharismaTextBox_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                Program.LoadedData.AvatarCharisma = Convert.ToInt32(CharismaTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Please enter a number in a range [0, 2147483647].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void FreeStatPointsTextBox_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                Program.LoadedData.AvatarFreeStatPoints = Convert.ToInt16(FreeStatPointsTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Please enter a number in a range [0, 32767].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void AbilityTypeListBox_Leave(object sender, EventArgs e)
+        {
+            var slot = AbilitySlotListBox.SelectedIndex;
+            var value = (AbilityTypeListBox.SelectedValue == null) ? (byte)255 : (byte)AbilityTypeListBox.SelectedValue;
+            Program.LoadedData.AvatarAbilities[slot].Type = value;
+            if (value == 255)
+            {
+                Program.LoadedData.AvatarAbilities[slot].SubType = value;
+                Program.LoadedData.AvatarAbilities[slot].Level = value;
+            }
+        }
+
+        private void AbilitySubtypeListBox_Leave(object sender, EventArgs e)
+        {
+            var slot = AbilitySlotListBox.SelectedIndex;
+            var value = (AbilitySubtypeListBox.SelectedValue == null) ? (byte)255 : (byte)AbilitySubtypeListBox.SelectedValue;
+            Program.LoadedData.AvatarAbilities[slot].SubType = value;
+            if (value == 255)
+            {
+                Program.LoadedData.AvatarAbilities[slot].Type = value;
+                Program.LoadedData.AvatarAbilities[slot].Level = value;
+            }
+        }
+
+        private void AbilityLevelListBox_Leave(object sender, EventArgs e)
+        {
+            var slot = AbilitySlotListBox.SelectedIndex;
+            var value = (AbilityLevelListBox.SelectedValue == null) ? (byte)255 : (byte)AbilityLevelListBox.SelectedValue;
+            Program.LoadedData.AvatarAbilities[slot].Level = value;
+            if (value == 255)
+            {
+                Program.LoadedData.AvatarAbilities[slot].Type = value;
+                Program.LoadedData.AvatarAbilities[slot].SubType = value;
+            }
+        }
+
+        private void FreeAbilityPointsTextBox_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                Program.LoadedData.AvatarFreeAbilityPoints = Convert.ToInt16(FreeAbilityPointsTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Please enter a number in a range [0, 32767].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

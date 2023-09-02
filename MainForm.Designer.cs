@@ -97,7 +97,7 @@
             OpenFileButton.ForeColor = Color.Black;
             OpenFileButton.Location = new Point(12, 12);
             OpenFileButton.Name = "OpenFileButton";
-            OpenFileButton.Size = new Size(98, 23);
+            OpenFileButton.Size = new Size(112, 23);
             OpenFileButton.TabIndex = 0;
             OpenFileButton.Text = "Open save file...";
             OpenFileButton.UseVisualStyleBackColor = true;
@@ -111,6 +111,7 @@
             LevelTextBox.Name = "LevelTextBox";
             LevelTextBox.Size = new Size(28, 23);
             LevelTextBox.TabIndex = 2;
+            LevelTextBox.Leave += LevelTextBox_Leave;
             // 
             // LevelProgressTrackBar
             // 
@@ -125,6 +126,7 @@
             LevelProgressTrackBar.TabIndex = 4;
             LevelProgressTrackBar.TickFrequency = 25;
             LevelProgressTrackBar.TickStyle = TickStyle.Both;
+            LevelProgressTrackBar.Leave += LevelProgressTrackBar_Leave;
             // 
             // AgilityLabel
             // 
@@ -143,6 +145,7 @@
             AgilityTextBox.Name = "AgilityTextBox";
             AgilityTextBox.Size = new Size(28, 23);
             AgilityTextBox.TabIndex = 6;
+            AgilityTextBox.Leave += AgilityTextBox_Leave;
             // 
             // CharismaTextBox
             // 
@@ -152,6 +155,7 @@
             CharismaTextBox.Name = "CharismaTextBox";
             CharismaTextBox.Size = new Size(28, 23);
             CharismaTextBox.TabIndex = 8;
+            CharismaTextBox.Leave += CharismaTextBox_Leave;
             // 
             // CharismaLabel
             // 
@@ -170,6 +174,7 @@
             DexterityTextBox.Name = "DexterityTextBox";
             DexterityTextBox.Size = new Size(28, 23);
             DexterityTextBox.TabIndex = 10;
+            DexterityTextBox.Leave += DexterityTextBox_Leave;
             // 
             // DexterityLabel
             // 
@@ -188,6 +193,7 @@
             IntelligenceTextBox.Name = "IntelligenceTextBox";
             IntelligenceTextBox.Size = new Size(28, 23);
             IntelligenceTextBox.TabIndex = 12;
+            IntelligenceTextBox.Leave += IntelligenceTextBox_Leave;
             // 
             // IntelligenceLabel
             // 
@@ -206,6 +212,7 @@
             StaminaTextBox.Name = "StaminaTextBox";
             StaminaTextBox.Size = new Size(28, 23);
             StaminaTextBox.TabIndex = 14;
+            StaminaTextBox.Leave += StaminaTextBox_Leave;
             // 
             // StaminaLabel
             // 
@@ -224,6 +231,7 @@
             StrengthTextBox.Name = "StrengthTextBox";
             StrengthTextBox.Size = new Size(28, 23);
             StrengthTextBox.TabIndex = 16;
+            StrengthTextBox.Leave += StrengthTextBox_Leave;
             // 
             // StrengthLabel
             // 
@@ -242,6 +250,7 @@
             WisdomTextBox.Name = "WisdomTextBox";
             WisdomTextBox.Size = new Size(28, 23);
             WisdomTextBox.TabIndex = 18;
+            WisdomTextBox.Leave += WisdomTextBox_Leave;
             // 
             // WisdomLabel
             // 
@@ -260,6 +269,7 @@
             FreeStatPointsTextBox.Name = "FreeStatPointsTextBox";
             FreeStatPointsTextBox.Size = new Size(28, 23);
             FreeStatPointsTextBox.TabIndex = 20;
+            FreeStatPointsTextBox.Leave += FreeStatPointsTextBox_Leave;
             // 
             // FreeStatPointsLabel
             // 
@@ -278,6 +288,7 @@
             GoldTextBox.Name = "GoldTextBox";
             GoldTextBox.Size = new Size(138, 23);
             GoldTextBox.TabIndex = 31;
+            GoldTextBox.Leave += GoldTextBox_Leave;
             // 
             // GoldLabel
             // 
@@ -353,6 +364,7 @@
             FreeAbilityPointsTextBox.Name = "FreeAbilityPointsTextBox";
             FreeAbilityPointsTextBox.Size = new Size(28, 23);
             FreeAbilityPointsTextBox.TabIndex = 39;
+            FreeAbilityPointsTextBox.Leave += FreeAbilityPointsTextBox_Leave;
             // 
             // FreeAbilityPointsLabel
             // 
@@ -408,6 +420,7 @@
             AbilityLevelListBox.Name = "AbilityLevelListBox";
             AbilityLevelListBox.Size = new Size(44, 199);
             AbilityLevelListBox.TabIndex = 33;
+            AbilityLevelListBox.Leave += AbilityLevelListBox_Leave;
             // 
             // AbilitySlotListBox
             // 
@@ -428,6 +441,7 @@
             AbilitySubtypeListBox.Name = "AbilitySubtypeListBox";
             AbilitySubtypeListBox.Size = new Size(118, 199);
             AbilitySubtypeListBox.TabIndex = 31;
+            AbilitySubtypeListBox.Leave += AbilitySubtypeListBox_Leave;
             // 
             // AbilityTypeListBox
             // 
@@ -438,6 +452,7 @@
             AbilityTypeListBox.Size = new Size(114, 199);
             AbilityTypeListBox.TabIndex = 30;
             AbilityTypeListBox.SelectedIndexChanged += AbilityTypeListBox_SelectedIndexChanged;
+            AbilityTypeListBox.Leave += AbilityTypeListBox_Leave;
             // 
             // StatPointsGroupBox
             // 
@@ -583,9 +598,9 @@
             // 
             ValidateAvatarButton.Enabled = false;
             ValidateAvatarButton.ForeColor = Color.Black;
-            ValidateAvatarButton.Location = new Point(116, 12);
+            ValidateAvatarButton.Location = new Point(130, 12);
             ValidateAvatarButton.Name = "ValidateAvatarButton";
-            ValidateAvatarButton.Size = new Size(101, 23);
+            ValidateAvatarButton.Size = new Size(112, 23);
             ValidateAvatarButton.TabIndex = 41;
             ValidateAvatarButton.Text = "Validate Avatar";
             ValidateAvatarButton.UseVisualStyleBackColor = true;
