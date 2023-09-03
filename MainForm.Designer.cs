@@ -435,6 +435,7 @@
             // 
             // AbilitySubtypeListBox
             // 
+            AbilitySubtypeListBox.Enabled = false;
             AbilitySubtypeListBox.FormattingEnabled = true;
             AbilitySubtypeListBox.ItemHeight = 15;
             AbilitySubtypeListBox.Location = new Point(162, 37);
@@ -445,6 +446,7 @@
             // 
             // AbilityTypeListBox
             // 
+            AbilityTypeListBox.Enabled = false;
             AbilityTypeListBox.FormattingEnabled = true;
             AbilityTypeListBox.ItemHeight = 15;
             AbilityTypeListBox.Location = new Point(42, 37);
