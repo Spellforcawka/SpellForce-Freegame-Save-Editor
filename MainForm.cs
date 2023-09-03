@@ -21,6 +21,7 @@ namespace SFSE
             Program.LoadedData = new SaveData(new SaveFile(saveFileStream).DecompressedChunks[0].Data);
 
             ValidateAvatarButton.Enabled = true;
+            SaveFileButton.Enabled = true;
 
             AvatarNameContentLabel.Text = new String(Program.LoadedData.Avatar.Name);
             AvatarSexContentLabel.Text = Program.LoadedData.Avatar.Sex == 1 ? "Female" : "Male";
@@ -358,6 +359,11 @@ namespace SFSE
             {
                 MessageBox.Show("Please enter a number in a range [0, 32767].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void SaveFileButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
