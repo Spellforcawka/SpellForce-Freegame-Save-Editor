@@ -1,4 +1,5 @@
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace SFSE
@@ -17,47 +18,50 @@ namespace SFSE
 
         private unsafe void OpenFileDialog_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            FileStream saveFileStream = File.OpenRead(OpenFileDialog.FileName);
-            Program.LoadedData = new SaveData(new SaveFile(saveFileStream).DecompressedChunks[0].Data);
+            Program.SaveFilePath = OpenFileDialog.FileName;
+            FileStream saveFileStream = File.OpenRead(Program.SaveFilePath);
+            Program.SaveFile = new SaveFile(saveFileStream);
+            saveFileStream.Close();
+            Program.SaveFileData = new SaveData(Program.SaveFile.DecompressedChunks[0].Data);
 
             ValidateAvatarButton.Enabled = true;
             SaveFileButton.Enabled = true;
 
-            AvatarNameContentLabel.Text = new String(Program.LoadedData.Avatar.Name);
-            AvatarSexContentLabel.Text = Program.LoadedData.Avatar.Sex == 1 ? "Female" : "Male";
-            AvatarModelContentLabel.Text = Program.LoadedData.Avatar.Model.ToString();
-            DateTime SaveTimestamp = new DateTime(1970, 1, 1).AddSeconds(Program.LoadedData.File.Timestamp);
+            AvatarNameContentLabel.Text = new String(Program.SaveFileData.AvatarData.Name);
+            AvatarSexContentLabel.Text = Program.SaveFileData.AvatarData.Sex == 1 ? "Female" : "Male";
+            AvatarModelContentLabel.Text = Program.SaveFileData.AvatarData.Model.ToString();
+            DateTime SaveTimestamp = new DateTime(1970, 1, 1).AddSeconds(Program.SaveFileData.FileData.Timestamp);
             SaveDateContentLabel.Text = SaveTimestamp.ToString();
 
             LevelTextBox.Enabled = true;
-            LevelTextBox.Text = Convert.ToString(Program.LoadedData.Avatar.Level);
+            LevelTextBox.Text = Convert.ToString(Program.SaveFileData.AvatarData.Level);
 
             LevelProgressTrackBar.Enabled = true;
-            LevelProgressTrackBar.Value = Experience.ToPercent(Program.LoadedData.Avatar.Level, Program.LoadedData.Avatar.Experience);
+            LevelProgressTrackBar.Value = Experience.ToPercent(Program.SaveFileData.AvatarData.Level, Program.SaveFileData.AvatarData.Experience);
 
             AgilityTextBox.Enabled = true;
-            AgilityTextBox.Text = Convert.ToString(Program.LoadedData.Avatar.Agility);
+            AgilityTextBox.Text = Convert.ToString(Program.SaveFileData.AvatarData.Agility);
 
             CharismaTextBox.Enabled = true;
-            CharismaTextBox.Text = Convert.ToString(Program.LoadedData.Avatar.Charisma);
+            CharismaTextBox.Text = Convert.ToString(Program.SaveFileData.AvatarData.Charisma);
 
             DexterityTextBox.Enabled = true;
-            DexterityTextBox.Text = Convert.ToString(Program.LoadedData.Avatar.Dexterity);
+            DexterityTextBox.Text = Convert.ToString(Program.SaveFileData.AvatarData.Dexterity);
 
             IntelligenceTextBox.Enabled = true;
-            IntelligenceTextBox.Text = Convert.ToString(Program.LoadedData.Avatar.Intelligence);
+            IntelligenceTextBox.Text = Convert.ToString(Program.SaveFileData.AvatarData.Intelligence);
 
             StaminaTextBox.Enabled = true;
-            StaminaTextBox.Text = Convert.ToString(Program.LoadedData.Avatar.Stamina);
+            StaminaTextBox.Text = Convert.ToString(Program.SaveFileData.AvatarData.Stamina);
 
             StrengthTextBox.Enabled = true;
-            StrengthTextBox.Text = Convert.ToString(Program.LoadedData.Avatar.Strength);
+            StrengthTextBox.Text = Convert.ToString(Program.SaveFileData.AvatarData.Strength);
 
             WisdomTextBox.Enabled = true;
-            WisdomTextBox.Text = Convert.ToString(Program.LoadedData.Avatar.Wisdom);
+            WisdomTextBox.Text = Convert.ToString(Program.SaveFileData.AvatarData.Wisdom);
 
             FreeStatPointsTextBox.Enabled = true;
-            FreeStatPointsTextBox.Text = Program.LoadedData.Avatar.FreeStatPoints.ToString();
+            FreeStatPointsTextBox.Text = Program.SaveFileData.AvatarData.FreeStatPoints.ToString();
 
             AbilitySlotListBox.Enabled = true;
             AbilitySlotListBox.Items.AddRange(new object[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" });
@@ -65,34 +69,34 @@ namespace SFSE
 
             AbilityTypeListBox.Enabled = true;
             AbilityTypeListBox.DataSource = Enum.GetValues(typeof(Program.AbilityType));
-            AbilityTypeListBox.SelectedItem = (Program.AbilityType)Program.LoadedData.Avatar.AbilityData[AbilitySlotListBox.SelectedIndex].Type;
+            AbilityTypeListBox.SelectedItem = (Program.AbilityType)Program.SaveFileData.AvatarData.AbilityData[AbilitySlotListBox.SelectedIndex].Type;
 
             AbilitySubtypeListBox.Enabled = true;
-            Program.UpdateSubtypeValue(AbilityTypeListBox, AbilitySubtypeListBox, Program.LoadedData.Avatar.AbilityData[0].SubType);
+            Program.UpdateSubtypeValue(AbilityTypeListBox, AbilitySubtypeListBox, Program.SaveFileData.AvatarData.AbilityData[0].SubType);
 
             AbilityLevelListBox.Enabled = true;
             AbilityLevelListBox.DataSource = Enum.GetValues(typeof(Program.AbilityLevel));
-            AbilityLevelListBox.SelectedItem = (Program.AbilityLevel)Program.LoadedData.Avatar.AbilityData[0].Level;
+            AbilityLevelListBox.SelectedItem = (Program.AbilityLevel)Program.SaveFileData.AvatarData.AbilityData[0].Level;
 
             FreeAbilityPointsTextBox.Enabled = true;
-            FreeAbilityPointsTextBox.Text = Program.LoadedData.Avatar.FreeAbilityPoints.ToString();
+            FreeAbilityPointsTextBox.Text = Program.SaveFileData.AvatarData.FreeAbilityPoints.ToString();
 
             GoldTextBox.Enabled = true;
-            GoldTextBox.Text = Program.LoadedData.Avatar.Gold.ToString();
+            GoldTextBox.Text = Program.SaveFileData.AvatarData.Gold.ToString();
 
             SilverTextBox.Enabled = true;
-            SilverTextBox.Text = Program.LoadedData.Avatar.Silver.ToString();
+            SilverTextBox.Text = Program.SaveFileData.AvatarData.Silver.ToString();
 
             CopperTextBox.Enabled = true;
-            CopperTextBox.Text = Program.LoadedData.Avatar.Copper.ToString();
+            CopperTextBox.Text = Program.SaveFileData.AvatarData.Copper.ToString();
         }
 
         private void AbilitySlotListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             var slot = AbilitySlotListBox.SelectedIndex;
-            AbilityTypeListBox.SelectedItem = (Program.AbilityType)Program.LoadedData.Avatar.AbilityData[slot].Type;
-            Program.UpdateSubtypeValue(AbilityTypeListBox, AbilitySubtypeListBox, Program.LoadedData.Avatar.AbilityData[slot].SubType);
-            AbilityLevelListBox.SelectedItem = (Program.AbilityLevel)Program.LoadedData.Avatar.AbilityData[slot].Level;
+            AbilityTypeListBox.SelectedItem = (Program.AbilityType)Program.SaveFileData.AvatarData.AbilityData[slot].Type;
+            Program.UpdateSubtypeValue(AbilityTypeListBox, AbilitySubtypeListBox, Program.SaveFileData.AvatarData.AbilityData[slot].SubType);
+            AbilityLevelListBox.SelectedItem = (Program.AbilityLevel)Program.SaveFileData.AvatarData.AbilityData[slot].Level;
         }
 
         private void AbilityTypeListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -102,26 +106,26 @@ namespace SFSE
 
         private void ValidateAvatarButton_Click(object sender, EventArgs e)
         {
-            var level = Program.LoadedData.Avatar.Level;
+            var level = Program.SaveFileData.AvatarData.Level;
 
-            var stats = Program.LoadedData.Avatar.Agility +
-                Program.LoadedData.Avatar.Charisma +
-                Program.LoadedData.Avatar.Dexterity +
-                Program.LoadedData.Avatar.Intelligence +
-                Program.LoadedData.Avatar.Stamina +
-                Program.LoadedData.Avatar.Strength +
-                Program.LoadedData.Avatar.Wisdom +
-                Program.LoadedData.Avatar.FreeStatPoints;
+            var stats = Program.SaveFileData.AvatarData.Agility +
+                Program.SaveFileData.AvatarData.Charisma +
+                Program.SaveFileData.AvatarData.Dexterity +
+                Program.SaveFileData.AvatarData.Intelligence +
+                Program.SaveFileData.AvatarData.Stamina +
+                Program.SaveFileData.AvatarData.Strength +
+                Program.SaveFileData.AvatarData.Wisdom +
+                Program.SaveFileData.AvatarData.FreeStatPoints;
 
             var abilities = 0;
             for (var i = 0; i < 10; i++)
             {
-                var abilityLevel = Program.LoadedData.Avatar.AbilityData[i].Level;
+                var abilityLevel = Program.SaveFileData.AvatarData.AbilityData[i].Level;
                 abilities += (abilityLevel == 255) ? 0 : abilityLevel;
             }
-            abilities += Program.LoadedData.Avatar.FreeAbilityPoints;
+            abilities += Program.SaveFileData.AvatarData.FreeAbilityPoints;
 
-            var experience = Program.LoadedData.Avatar.Experience;
+            var experience = Program.SaveFileData.AvatarData.Experience;
 
             if (experience < Experience.ForLevel[level] || experience > Experience.ForLevel[(byte)(level + 1)])
             {
@@ -167,8 +171,8 @@ namespace SFSE
             {
                 Byte level = Convert.ToByte(LevelTextBox.Text);
                 if (level > 50 || level < 1) throw new Exception();
-                Program.LoadedData.Avatar.Level = level;
-                Program.LoadedData.Avatar.Experience = Experience.FromPercent(level, (byte)LevelProgressTrackBar.Value);
+                Program.SaveFileData.AvatarData.Level = level;
+                Program.SaveFileData.AvatarData.Experience = Experience.FromPercent(level, (byte)LevelProgressTrackBar.Value);
             }
             catch
             {
@@ -178,14 +182,14 @@ namespace SFSE
 
         private void LevelProgressTrackBar_Leave(object sender, EventArgs e)
         {
-            Program.LoadedData.Avatar.Experience = Experience.FromPercent(Program.LoadedData.Avatar.Level, (byte)LevelProgressTrackBar.Value);
+            Program.SaveFileData.AvatarData.Experience = Experience.FromPercent(Program.SaveFileData.AvatarData.Level, (byte)LevelProgressTrackBar.Value);
         }
 
         private void GoldTextBox_Leave(object sender, EventArgs e)
         {
             try
             {
-                Program.LoadedData.Avatar.Gold = Convert.ToInt32(GoldTextBox.Text);
+                Program.SaveFileData.AvatarData.Gold = Convert.ToInt32(GoldTextBox.Text);
             }
             catch
             {
@@ -197,7 +201,7 @@ namespace SFSE
         {
             try
             {
-                Program.LoadedData.Avatar.Silver = Convert.ToInt32(SilverTextBox.Text);
+                Program.SaveFileData.AvatarData.Silver = Convert.ToInt32(SilverTextBox.Text);
             }
             catch
             {
@@ -209,7 +213,7 @@ namespace SFSE
         {
             try
             {
-                Program.LoadedData.Avatar.Copper = Convert.ToInt32(CopperTextBox.Text);
+                Program.SaveFileData.AvatarData.Copper = Convert.ToInt32(CopperTextBox.Text);
             }
             catch
             {
@@ -221,7 +225,7 @@ namespace SFSE
         {
             try
             {
-                Program.LoadedData.Avatar.Strength = Convert.ToInt16(StrengthTextBox.Text);
+                Program.SaveFileData.AvatarData.Strength = Convert.ToInt16(StrengthTextBox.Text);
             }
             catch
             {
@@ -233,7 +237,7 @@ namespace SFSE
         {
             try
             {
-                Program.LoadedData.Avatar.Stamina = Convert.ToInt16(StaminaTextBox.Text);
+                Program.SaveFileData.AvatarData.Stamina = Convert.ToInt16(StaminaTextBox.Text);
             }
             catch
             {
@@ -245,7 +249,7 @@ namespace SFSE
         {
             try
             {
-                Program.LoadedData.Avatar.Dexterity = Convert.ToInt16(DexterityTextBox.Text);
+                Program.SaveFileData.AvatarData.Dexterity = Convert.ToInt16(DexterityTextBox.Text);
             }
             catch
             {
@@ -257,7 +261,7 @@ namespace SFSE
         {
             try
             {
-                Program.LoadedData.Avatar.Agility = Convert.ToInt16(AgilityTextBox.Text);
+                Program.SaveFileData.AvatarData.Agility = Convert.ToInt16(AgilityTextBox.Text);
             }
             catch
             {
@@ -269,7 +273,7 @@ namespace SFSE
         {
             try
             {
-                Program.LoadedData.Avatar.Intelligence = Convert.ToInt16(IntelligenceTextBox.Text);
+                Program.SaveFileData.AvatarData.Intelligence = Convert.ToInt16(IntelligenceTextBox.Text);
             }
             catch
             {
@@ -281,7 +285,7 @@ namespace SFSE
         {
             try
             {
-                Program.LoadedData.Avatar.Wisdom = Convert.ToInt16(WisdomTextBox.Text);
+                Program.SaveFileData.AvatarData.Wisdom = Convert.ToInt16(WisdomTextBox.Text);
             }
             catch
             {
@@ -293,7 +297,7 @@ namespace SFSE
         {
             try
             {
-                Program.LoadedData.Avatar.Charisma = Convert.ToInt16(CharismaTextBox.Text);
+                Program.SaveFileData.AvatarData.Charisma = Convert.ToInt16(CharismaTextBox.Text);
             }
             catch
             {
@@ -305,7 +309,7 @@ namespace SFSE
         {
             try
             {
-                Program.LoadedData.Avatar.FreeStatPoints = Convert.ToInt16(FreeStatPointsTextBox.Text);
+                Program.SaveFileData.AvatarData.FreeStatPoints = Convert.ToInt16(FreeStatPointsTextBox.Text);
             }
             catch
             {
@@ -317,11 +321,11 @@ namespace SFSE
         {
             var slot = AbilitySlotListBox.SelectedIndex;
             var value = (AbilityTypeListBox.SelectedValue == null) ? (byte)255 : (byte)AbilityTypeListBox.SelectedValue;
-            Program.LoadedData.Avatar.AbilityData[slot].Type = value;
+            Program.SaveFileData.AvatarData.AbilityData[slot].Type = value;
             if (value == 255)
             {
-                Program.LoadedData.Avatar.AbilityData[slot].SubType = value;
-                Program.LoadedData.Avatar.AbilityData[slot].Level = value;
+                Program.SaveFileData.AvatarData.AbilityData[slot].SubType = value;
+                Program.SaveFileData.AvatarData.AbilityData[slot].Level = value;
             }
         }
 
@@ -329,11 +333,11 @@ namespace SFSE
         {
             var slot = AbilitySlotListBox.SelectedIndex;
             var value = (AbilitySubtypeListBox.SelectedValue == null) ? (byte)255 : (byte)AbilitySubtypeListBox.SelectedValue;
-            Program.LoadedData.Avatar.AbilityData[slot].SubType = value;
+            Program.SaveFileData.AvatarData.AbilityData[slot].SubType = value;
             if (value == 255)
             {
-                Program.LoadedData.Avatar.AbilityData[slot].Type = value;
-                Program.LoadedData.Avatar.AbilityData[slot].Level = value;
+                Program.SaveFileData.AvatarData.AbilityData[slot].Type = value;
+                Program.SaveFileData.AvatarData.AbilityData[slot].Level = value;
             }
         }
 
@@ -341,11 +345,11 @@ namespace SFSE
         {
             var slot = AbilitySlotListBox.SelectedIndex;
             var value = (AbilityLevelListBox.SelectedValue == null) ? (byte)255 : (byte)AbilityLevelListBox.SelectedValue;
-            Program.LoadedData.Avatar.AbilityData[slot].Level = value;
+            Program.SaveFileData.AvatarData.AbilityData[slot].Level = value;
             if (value == 255)
             {
-                Program.LoadedData.Avatar.AbilityData[slot].Type = value;
-                Program.LoadedData.Avatar.AbilityData[slot].SubType = value;
+                Program.SaveFileData.AvatarData.AbilityData[slot].Type = value;
+                Program.SaveFileData.AvatarData.AbilityData[slot].SubType = value;
             }
         }
 
@@ -353,7 +357,7 @@ namespace SFSE
         {
             try
             {
-                Program.LoadedData.Avatar.FreeAbilityPoints = Convert.ToInt16(FreeAbilityPointsTextBox.Text);
+                Program.SaveFileData.AvatarData.FreeAbilityPoints = Convert.ToInt16(FreeAbilityPointsTextBox.Text);
             }
             catch
             {
@@ -363,7 +367,40 @@ namespace SFSE
 
         private void SaveFileButton_Click(object sender, EventArgs e)
         {
+            TimeSpan t = DateTime.UtcNow - new DateTime(1970, 1, 1);
+            int timestamp = (int)t.TotalSeconds;
+            
+            File.Copy(Program.SaveFilePath, Program.SaveFilePath + ".bak-" + timestamp);
+            Program.SaveFile.DecompressedChunks[0] = new DecompressedSaveChunk(Program.SaveFileData);
 
+            File.Delete(Program.SaveFilePath);
+
+            FileStream fs = new FileStream(Program.SaveFilePath, FileMode.Create, FileAccess.Write);
+
+            // SaveFile serialization
+            fs.Write(BitConverter.GetBytes(Program.SaveFile.Header.Magic));
+            fs.Write(BitConverter.GetBytes(Program.SaveFile.Header.Version));
+            fs.Write(BitConverter.GetBytes(Program.SaveFile.Header.Padding1));
+            fs.Write(BitConverter.GetBytes(Program.SaveFile.Header.Padding2));
+            fs.Write(BitConverter.GetBytes(Program.SaveFile.Header.Padding3));
+
+            for (int i = 0; i < Program.SaveFile.DecompressedChunks.Count; ++i)
+            {
+                // save file chunk ids start at 7001
+                // file ID 7001 (save data) has unknown properties of 1 and 8
+                // file ID 7002 (mods data, when save file comes from game version 1.61) has unknown properties of 1 and 1
+                CompressedSaveChunk compressedSaveChunk = new CompressedSaveChunk(Program.SaveFile.DecompressedChunks[i], new CompressedChunkHeader{Id = 7001 + i, Unk1 = 1, Unk2 = (Int16)(i == 0 ? 8 : 1)});  
+                fs.Write(BitConverter.GetBytes(compressedSaveChunk.Header.Id));                                                                                                                                                                                                                                                                                                       
+                fs.Write(BitConverter.GetBytes(compressedSaveChunk.Header.Unk1));
+                fs.Write(BitConverter.GetBytes(compressedSaveChunk.Header.CompressedSize));
+                fs.Write(BitConverter.GetBytes(compressedSaveChunk.Header.Unk2));
+                fs.Write(BitConverter.GetBytes(compressedSaveChunk.Header.DecompressedSize));
+                fs.Write(compressedSaveChunk.Data);
+            }
+
+            fs.Close();
+
+            MessageBox.Show("Save file written successfully!", "Done!", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

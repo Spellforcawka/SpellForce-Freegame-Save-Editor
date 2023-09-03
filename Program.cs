@@ -102,7 +102,9 @@ namespace SFSE
             Empty = 255
         }
 
-        public static SaveData LoadedData;
+        public static String SaveFilePath;
+        public static SaveFile SaveFile;
+        public static SaveData SaveFileData;
 
         public static unsafe byte[] Serialize<T>(T value) where T : struct
         {

@@ -17,7 +17,7 @@ namespace SFSE
     }
     internal class SaveFile
     {
-        SaveFileHeader Header;
+        public SaveFileHeader Header;
         public List<DecompressedSaveChunk> DecompressedChunks;
 
         static UInt16 HeaderSize = 20;
@@ -28,7 +28,7 @@ namespace SFSE
             fileStream.ReadExactly(rawHeader);
             Header = Program.Deserialize<SaveFileHeader>(rawHeader);
             DecompressedChunks = new List<DecompressedSaveChunk>();
-            while (fileStream.Position < fileStream.Length) 
+            while (fileStream.Position < fileStream.Length)
             {
                 DecompressedChunks.Add(new DecompressedSaveChunk(new CompressedSaveChunk(fileStream)));
             }

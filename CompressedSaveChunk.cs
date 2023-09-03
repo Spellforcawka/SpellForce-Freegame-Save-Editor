@@ -15,7 +15,7 @@ namespace SFSE
         public Int16 Unk1;
         public Int32 CompressedSize;
         public Int16 Unk2;
-        public Int32 UncompressedSize;
+        public Int32 DecompressedSize;
     }
 
     internal class CompressedSaveChunk
@@ -34,11 +34,27 @@ namespace SFSE
             fileStream.ReadExactly(Data);
         }
 
-        public CompressedSaveChunk(DecompressedSaveChunk decompressedSaveChunk)
+        public CompressedSaveChunk(DecompressedSaveChunk decompressedSaveChunk, CompressedChunkHeader header)
         {
-            ZLibStream stream = new ZLibStream(new MemoryStream(decompressedSaveChunk.Data), CompressionMode.Compress, false);
-            Data = new Byte[Header.CompressedSize];
-            stream.Write(Data, 0, Header.CompressedSize);
+            // Copied from original SaveData chunk
+            Header.Id = header.Id;
+            Header.Unk1 = header.Unk1;
+            Header.Unk2 = header.Unk2;
+            Header.DecompressedSize = decompressedSaveChunk.Data.Length;
+
+            MemoryStream inputStream = new MemoryStream(decompressedSaveChunk.Data);
+            MemoryStream outputStream = new MemoryStream();
+            ZLibStream zLibStream = new ZLibStream(outputStream, CompressionMode.Compress);
+
+            int bytes = 0;
+            byte[] buffer = new byte[256];
+            while ((bytes = inputStream.Read(buffer, 0, buffer.Length)) > 0)
+            {
+                zLibStream.Write(buffer, 0, bytes);
+            }
+            zLibStream.Close();
+            Data = outputStream.ToArray();
+            Header.CompressedSize = Data.Length;
         }
     }
 }

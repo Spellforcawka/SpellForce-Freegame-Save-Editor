@@ -21,9 +21,9 @@ namespace SFSE
     public struct FileData
     {
         public Int32 NameLength;
-        public Char[] Name; // #NameLength+1
+        public Char[] Name;
         public Int32 PathLength;
-        public Char[] Path; // #PathLength+1
+        public Char[] Path;
         public Int32 Timestamp;
     }
     
@@ -95,9 +95,9 @@ namespace SFSE
 
     internal class SaveData
     {
-        public FileData File;
-        public AvatarData Avatar = new AvatarData();
-        public ItemData[] Items; // #ItemCount
+        public FileData FileData;
+        public AvatarData AvatarData = new AvatarData();
+        public ItemData[] ItemData;
 
         public unsafe SaveData(Byte[] data)
         {
@@ -105,38 +105,38 @@ namespace SFSE
             Byte[] buffer4 = new Byte[4], buffer2 = new Byte[2];
 
             stream.ReadExactly(buffer4);
-            File.NameLength = BitConverter.ToInt32(buffer4);
+            FileData.NameLength = BitConverter.ToInt32(buffer4);
 
-            File.Name = new Char[File.NameLength];
-            for (int i = 0; i < File.NameLength; i++)
+            FileData.Name = new Char[FileData.NameLength];
+            for (int i = 0; i < FileData.NameLength; i++)
             {
                 stream.ReadExactly(buffer2);
-                File.Name[i] = BitConverter.ToChar(buffer2);
+                FileData.Name[i] = BitConverter.ToChar(buffer2);
             }
 
             stream.ReadExactly(buffer4);
-            File.PathLength = BitConverter.ToInt32(buffer4);
+            FileData.PathLength = BitConverter.ToInt32(buffer4);
 
-            File.Path = new Char[File.PathLength];
-            for (int i = 0; i < File.PathLength; i++)
+            FileData.Path = new Char[FileData.PathLength];
+            for (int i = 0; i < FileData.PathLength; i++)
             {
                 stream.ReadExactly(buffer2);
-                File.Path[i] = BitConverter.ToChar(buffer2);
+                FileData.Path[i] = BitConverter.ToChar(buffer2);
             }
 
             stream.ReadExactly(buffer4);
-            File.Timestamp = BitConverter.ToInt32(buffer4);
+            FileData.Timestamp = BitConverter.ToInt32(buffer4);
 
-            Byte[] avatarData = new Byte[228];
+            Byte[] avatarData = new Byte[227];
             stream.ReadExactly(avatarData);
-            Avatar = Program.Deserialize<AvatarData>(avatarData);
+            AvatarData = Program.Deserialize<AvatarData>(avatarData);
 
-            Items = new ItemData[Avatar.ItemCount];
-            for (int i = 0; i < Avatar.ItemCount; i++)
+            ItemData = new ItemData[AvatarData.ItemCount];
+            for (int i = 0; i < AvatarData.ItemCount; i++)
             {
                 Byte[] buffer = new Byte[10];
                 stream.ReadAtLeast(buffer, 10, false);
-                Items[i] = Program.Deserialize<ItemData>(buffer);
+                ItemData[i] = Program.Deserialize<ItemData>(buffer);
             }
         }
     }
