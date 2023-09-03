@@ -18,7 +18,73 @@ namespace SFSE
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    public struct Item
+    public struct FileData
+    {
+        public Int32 NameLength;
+        public Char[] Name; // #NameLength+1
+        public Int32 PathLength;
+        public Char[] Path; // #PathLength+1
+        public Int32 Timestamp;
+    }
+    
+    [StructLayout(LayoutKind.Sequential, Pack = 1, CharSet = CharSet.Unicode)]
+    public unsafe struct AvatarData
+    {
+        public Int16 Unknown1;
+        public Int32 Unknown2;
+        public Int32 IsPredefinedFlag;
+        public Byte PredefinedTemplateId;
+        public Int32 Unknown3; // most commonly =100, but sometimes =201, =202
+        public Byte Level;
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 15)]
+        public String Name;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 25)]
+        public Char[] NamePaddingUnknown = new Char[25];
+        public Int32 ScriptId1;
+        public Int32 ScriptUnknown1;
+        public Int32 ScriptId2;
+        public Int32 ScriptUnknown2;
+        public Int16 Agility;
+        public Int16 Charisma;
+        public Int16 Dexterity;
+        public Int16 Intelligence;
+        public Int16 Stamina;
+        public Int16 Strength;
+        public Int16 Wisdom;
+        public Int16 FireResistance;
+        public Int16 IceResistance;
+        public Int16 BlackMagicResistance;
+        public Int16 MindMagicResistance;
+        public Int16 RunSpeed;
+        public Int16 FightSpeed;
+        public Int16 CastSpeed;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = 10)]
+        public Ability[] AbilityData = new Ability[10];
+        public Int16 Model;
+        public Int32 Copper;
+        public Int32 Silver;
+        public Int32 Gold;
+        public Int32 Unknown4;
+        public Int32 Unknown5;
+        public Int32 Unknown6;
+        public Int32 Experience;
+        public Int16 FreeAbilityPoints;
+        public Int16 FreeStatPoints;
+        public Int32 Unknown7;
+        public Int32 Sex;
+        public Int32 Unknown8;
+        public Int32 Unknown9;
+        public Int16 Unknown10;
+        public Byte Unknown11;
+        public Int32 ItemCount;
+
+        public AvatarData()
+        {
+        }
+    }
+
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct ItemData
     {
         public Byte InventoryType; // TODO: Create an Enum.
         public Byte SlotMaxUsed;
@@ -29,240 +95,48 @@ namespace SFSE
 
     internal class SaveData
     {
-        public Int32 FileNameLength;
-        public Char[] FileName; // #FileNameLength+1
-        public Int32 FilePathLength;
-        public Char[] FilePath; // #FilePathLength+1
-        public Int32 Timestamp;
-        public Int16 Unknown1;
-        public Int32 Unknown2;
-        public Int32 AvatarPredefinedFlag;
-        public Byte AvatarPredefinedTemplateId;
-        public Int32 Unknown3; // most commonly =100, but sometimes =201, =202
-        public Byte AvatarLevel;
-        public Char[] AvatarName; // #15
-        public Char[] AvatarNamePaddingUnknown; // #25
-        public Int32 AvatarScriptId1;
-        public Int32 AvatarScriptUnknown1;
-        public Int32 AvatarScriptId2;
-        public Int32 AvatarScriptUnknown2;
-        public Int32 AvatarAgility;
-        public Int32 AvatarCharisma;
-        public Int32 AvatarDexterity;
-        public Int32 AvatarIntelligence;
-        public Int32 AvatarStamina;
-        public Int32 AvatarStrength;
-        public Int32 AvatarWisdom;
-        public Int32 AvatarFireResistance;
-        public Int32 AvatarIceResistance;
-        public Int32 AvatarBlackMagicResistance;
-        public Int32 AvatarMindMagicResistance;
-        public Int32 AvatarRunSpeed;
-        public Int32 AvatarFightSpeed;
-        public Int32 AvatarCastSpeed;
-        public Ability[] AvatarAbilities; // #10
-        public Int16 AvatarModel;
-        public Int32 AvatarCopper;
-        public Int32 AvatarSilver;
-        public Int32 AvatarGold;
-        public Int32 Unknown4;
-        public Int32 Unknown5;
-        public Int32 Unknown6;
-        public Int32 AvatarExperience;
-        public Int16 AvatarFreeAbilityPoints;
-        public Int16 AvatarFreeStatPoints;
-        public Int32 Unknown7;
-        public Int32 AvatarSex;
-        public Int32 Unknown8;
-        public Int32 Unknown9;
-        public Int16 Unknown10;
-        public Byte Unknown11;
-        public Int32 ItemCount;
-        public Item[] Items; // ItemCount
+        public FileData File;
+        public AvatarData Avatar = new AvatarData();
+        public ItemData[] Items; // #ItemCount
 
-        public SaveData(Byte[] data)
+        public unsafe SaveData(Byte[] data)
         {
             MemoryStream stream = new MemoryStream(data);
-            Byte[] buffer4 = new Byte[4], buffer2 = new Byte[2], buffer1 = new Byte[1];
+            Byte[] buffer4 = new Byte[4], buffer2 = new Byte[2];
 
             stream.ReadExactly(buffer4);
-            FileNameLength = BitConverter.ToInt32(buffer4);
+            File.NameLength = BitConverter.ToInt32(buffer4);
 
-            FileName = new Char[FileNameLength];
-            for (int i = 0; i < FileNameLength; i++)
+            File.Name = new Char[File.NameLength];
+            for (int i = 0; i < File.NameLength; i++)
             {
                 stream.ReadExactly(buffer2);
-                FileName[i] = BitConverter.ToChar(buffer2);
+                File.Name[i] = BitConverter.ToChar(buffer2);
             }
 
             stream.ReadExactly(buffer4);
-            FilePathLength = BitConverter.ToInt32(buffer4);
+            File.PathLength = BitConverter.ToInt32(buffer4);
 
-            FilePath = new Char[FilePathLength];
-            for (int i = 0; i < FilePathLength; i++)
+            File.Path = new Char[File.PathLength];
+            for (int i = 0; i < File.PathLength; i++)
             {
                 stream.ReadExactly(buffer2);
-                FilePath[i] = BitConverter.ToChar(buffer2);
+                File.Path[i] = BitConverter.ToChar(buffer2);
             }
 
             stream.ReadExactly(buffer4);
-            Timestamp = BitConverter.ToInt32(buffer4);
+            File.Timestamp = BitConverter.ToInt32(buffer4);
 
-            stream.ReadExactly(buffer2);
-            Unknown1 = BitConverter.ToInt16(buffer2);
+            Byte[] avatarData = new Byte[228];
+            stream.ReadExactly(avatarData);
+            Avatar = Program.Deserialize<AvatarData>(avatarData);
 
-            stream.ReadExactly(buffer4);
-            Unknown2 = BitConverter.ToInt32(buffer4);
-
-            stream.ReadExactly(buffer4);
-            AvatarPredefinedFlag = BitConverter.ToInt32(buffer4);
-
-            stream.ReadExactly(buffer1);
-            AvatarPredefinedTemplateId = buffer1[0];
-
-            stream.ReadExactly(buffer4);
-            Unknown3 = BitConverter.ToInt32(buffer4);
-
-            stream.ReadExactly(buffer1);
-            AvatarLevel = buffer1[0];
-
-            AvatarName = new Char[15];
-            for (int i = 0; i < 15; i++)
-            {
-                stream.ReadExactly(buffer2);
-                AvatarName[i] = BitConverter.ToChar(buffer2);
-            }
-
-            AvatarNamePaddingUnknown = new Char[25];
-            for (int i = 0; i < 25; i++)
-            {
-                stream.ReadExactly(buffer2);
-                AvatarNamePaddingUnknown[i] = BitConverter.ToChar(buffer2);
-            }
-
-            stream.ReadExactly(buffer4);
-            AvatarScriptId1 = BitConverter.ToInt32(buffer4);
-
-            stream.ReadExactly(buffer4);
-            AvatarScriptUnknown1 = BitConverter.ToInt32(buffer4);
-
-            stream.ReadExactly(buffer4);
-            AvatarScriptId2 = BitConverter.ToInt32(buffer4);
-
-            stream.ReadExactly(buffer4);
-            AvatarScriptUnknown2 = BitConverter.ToInt32(buffer4);
-
-            stream.ReadExactly(buffer2);
-            AvatarAgility = BitConverter.ToChar(buffer2);
-
-            stream.ReadExactly(buffer2);
-            AvatarCharisma = BitConverter.ToChar(buffer2);
-
-            stream.ReadExactly(buffer2);
-            AvatarDexterity = BitConverter.ToChar(buffer2);
-
-            stream.ReadExactly(buffer2);
-            AvatarIntelligence = BitConverter.ToChar(buffer2);
-
-            stream.ReadExactly(buffer2);
-            AvatarStamina = BitConverter.ToChar(buffer2);
-
-            stream.ReadExactly(buffer2);
-            AvatarStrength = BitConverter.ToChar(buffer2);
-
-            stream.ReadExactly(buffer2);
-            AvatarWisdom = BitConverter.ToChar(buffer2);
-
-            stream.ReadExactly(buffer2);
-            AvatarFireResistance = BitConverter.ToChar(buffer2);
-
-            stream.ReadExactly(buffer2);
-            AvatarIceResistance = BitConverter.ToChar(buffer2);
-
-            stream.ReadExactly(buffer2);
-            AvatarBlackMagicResistance = BitConverter.ToChar(buffer2);
-
-            stream.ReadExactly(buffer2);
-            AvatarMindMagicResistance = BitConverter.ToChar(buffer2);
-
-            stream.ReadExactly(buffer2);
-            AvatarRunSpeed = BitConverter.ToChar(buffer2);
-
-            stream.ReadExactly(buffer2);
-            AvatarFightSpeed = BitConverter.ToChar(buffer2);
-
-            stream.ReadExactly(buffer2);
-            AvatarCastSpeed = BitConverter.ToChar(buffer2);
-
-            AvatarAbilities = new Ability[10];
-            for (int i = 0; i < 10;  i++)
-            {
-                AvatarAbilities[i] = new Ability();
-                stream.ReadExactly(buffer1);
-                AvatarAbilities[i].Type = buffer1[0];
-                stream.ReadExactly(buffer1);
-                AvatarAbilities[i].SubType = buffer1[0];
-                stream.ReadExactly(buffer1);
-                AvatarAbilities[i].Level = buffer1[0];
-            }
-
-            stream.ReadExactly(buffer2);
-            AvatarModel = BitConverter.ToInt16(buffer2);
-
-            stream.ReadExactly(buffer4);
-            AvatarCopper = BitConverter.ToInt32(buffer4);
-
-            stream.ReadExactly(buffer4);
-            AvatarSilver = BitConverter.ToInt32(buffer4);
-
-            stream.ReadExactly(buffer4);
-            AvatarGold = BitConverter.ToInt32(buffer4);
-
-            stream.ReadExactly(buffer4);
-            Unknown4 = BitConverter.ToInt32(buffer4);
-
-            stream.ReadExactly(buffer4);
-            Unknown5 = BitConverter.ToInt32(buffer4);
-
-            stream.ReadExactly(buffer4);
-            Unknown6 = BitConverter.ToInt32(buffer4);
-
-            stream.ReadExactly(buffer4);
-            AvatarExperience = BitConverter.ToInt32(buffer4);
-
-            stream.ReadExactly(buffer2);
-            AvatarFreeAbilityPoints = BitConverter.ToInt16(buffer2);
-
-            stream.ReadExactly(buffer2);
-            AvatarFreeStatPoints = BitConverter.ToInt16(buffer2);
-
-            stream.ReadExactly(buffer4);
-            Unknown7 = BitConverter.ToInt32(buffer4);
-
-            stream.ReadExactly(buffer4);
-            AvatarSex = BitConverter.ToInt32(buffer4);
-
-            stream.ReadExactly(buffer4);
-            Unknown8 = BitConverter.ToInt32(buffer4);
-
-            stream.ReadExactly(buffer4);
-            Unknown9 = BitConverter.ToInt32(buffer4);
-
-            stream.ReadExactly(buffer2);
-            Unknown10 = BitConverter.ToInt16(buffer2);
-
-            stream.ReadExactly(buffer1);
-            Unknown11 = buffer1[0];
-
-            stream.ReadExactly(buffer4);
-            ItemCount = BitConverter.ToInt32(buffer4);
-
-            Items = new Item[ItemCount];
-            for (int i = 0; i < ItemCount; i++)
+            Items = new ItemData[Avatar.ItemCount];
+            for (int i = 0; i < Avatar.ItemCount; i++)
             {
                 Byte[] buffer = new Byte[10];
                 stream.ReadAtLeast(buffer, 10, false);
-                Items[i] = Program.DeserializeValueType<Item>(buffer);
+                Items[i] = Program.Deserialize<ItemData>(buffer);
             }
         }
     }

@@ -15,48 +15,48 @@ namespace SFSE
             OpenFileDialog.ShowDialog(this);
         }
 
-        private void OpenFileDialog_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+        private unsafe void OpenFileDialog_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
         {
             FileStream saveFileStream = File.OpenRead(OpenFileDialog.FileName);
             Program.LoadedData = new SaveData(new SaveFile(saveFileStream).DecompressedChunks[0].Data);
 
             ValidateAvatarButton.Enabled = true;
 
-            AvatarNameContentLabel.Text = new String(Program.LoadedData.AvatarName);
-            AvatarSexContentLabel.Text = Program.LoadedData.AvatarSex == 1 ? "Female" : "Male";
-            AvatarModelContentLabel.Text = Program.LoadedData.AvatarModel.ToString();
-            DateTime SaveTimestamp = new DateTime(1970, 1, 1).AddSeconds(Program.LoadedData.Timestamp);
+            AvatarNameContentLabel.Text = new String(Program.LoadedData.Avatar.Name);
+            AvatarSexContentLabel.Text = Program.LoadedData.Avatar.Sex == 1 ? "Female" : "Male";
+            AvatarModelContentLabel.Text = Program.LoadedData.Avatar.Model.ToString();
+            DateTime SaveTimestamp = new DateTime(1970, 1, 1).AddSeconds(Program.LoadedData.File.Timestamp);
             SaveDateContentLabel.Text = SaveTimestamp.ToString();
 
             LevelTextBox.Enabled = true;
-            LevelTextBox.Text = Convert.ToString(Program.LoadedData.AvatarLevel);
+            LevelTextBox.Text = Convert.ToString(Program.LoadedData.Avatar.Level);
 
             LevelProgressTrackBar.Enabled = true;
-            LevelProgressTrackBar.Value = Experience.ToPercent(Program.LoadedData.AvatarLevel, Program.LoadedData.AvatarExperience);
+            LevelProgressTrackBar.Value = Experience.ToPercent(Program.LoadedData.Avatar.Level, Program.LoadedData.Avatar.Experience);
 
             AgilityTextBox.Enabled = true;
-            AgilityTextBox.Text = Convert.ToString(Program.LoadedData.AvatarAgility);
+            AgilityTextBox.Text = Convert.ToString(Program.LoadedData.Avatar.Agility);
 
             CharismaTextBox.Enabled = true;
-            CharismaTextBox.Text = Convert.ToString(Program.LoadedData.AvatarCharisma);
+            CharismaTextBox.Text = Convert.ToString(Program.LoadedData.Avatar.Charisma);
 
             DexterityTextBox.Enabled = true;
-            DexterityTextBox.Text = Convert.ToString(Program.LoadedData.AvatarDexterity);
+            DexterityTextBox.Text = Convert.ToString(Program.LoadedData.Avatar.Dexterity);
 
             IntelligenceTextBox.Enabled = true;
-            IntelligenceTextBox.Text = Convert.ToString(Program.LoadedData.AvatarIntelligence);
+            IntelligenceTextBox.Text = Convert.ToString(Program.LoadedData.Avatar.Intelligence);
 
             StaminaTextBox.Enabled = true;
-            StaminaTextBox.Text = Convert.ToString(Program.LoadedData.AvatarStamina);
+            StaminaTextBox.Text = Convert.ToString(Program.LoadedData.Avatar.Stamina);
 
             StrengthTextBox.Enabled = true;
-            StrengthTextBox.Text = Convert.ToString(Program.LoadedData.AvatarStrength);
+            StrengthTextBox.Text = Convert.ToString(Program.LoadedData.Avatar.Strength);
 
             WisdomTextBox.Enabled = true;
-            WisdomTextBox.Text = Convert.ToString(Program.LoadedData.AvatarWisdom);
+            WisdomTextBox.Text = Convert.ToString(Program.LoadedData.Avatar.Wisdom);
 
             FreeStatPointsTextBox.Enabled = true;
-            FreeStatPointsTextBox.Text = Program.LoadedData.AvatarFreeStatPoints.ToString();
+            FreeStatPointsTextBox.Text = Program.LoadedData.Avatar.FreeStatPoints.ToString();
 
             AbilitySlotListBox.Enabled = true;
             AbilitySlotListBox.Items.AddRange(new object[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" });
@@ -64,34 +64,34 @@ namespace SFSE
 
             AbilityTypeListBox.Enabled = true;
             AbilityTypeListBox.DataSource = Enum.GetValues(typeof(Program.AbilityType));
-            AbilityTypeListBox.SelectedItem = (Program.AbilityType)Program.LoadedData.AvatarAbilities[AbilitySlotListBox.SelectedIndex].Type;
+            AbilityTypeListBox.SelectedItem = (Program.AbilityType)Program.LoadedData.Avatar.AbilityData[AbilitySlotListBox.SelectedIndex].Type;
 
             AbilitySubtypeListBox.Enabled = true;
-            Program.UpdateSubtypeValue(AbilityTypeListBox, AbilitySubtypeListBox, Program.LoadedData.AvatarAbilities[0].SubType);
+            Program.UpdateSubtypeValue(AbilityTypeListBox, AbilitySubtypeListBox, Program.LoadedData.Avatar.AbilityData[0].SubType);
 
             AbilityLevelListBox.Enabled = true;
             AbilityLevelListBox.DataSource = Enum.GetValues(typeof(Program.AbilityLevel));
-            AbilityLevelListBox.SelectedItem = (Program.AbilityLevel)Program.LoadedData.AvatarAbilities[0].Level;
+            AbilityLevelListBox.SelectedItem = (Program.AbilityLevel)Program.LoadedData.Avatar.AbilityData[0].Level;
 
             FreeAbilityPointsTextBox.Enabled = true;
-            FreeAbilityPointsTextBox.Text = Program.LoadedData.AvatarFreeAbilityPoints.ToString();
+            FreeAbilityPointsTextBox.Text = Program.LoadedData.Avatar.FreeAbilityPoints.ToString();
 
             GoldTextBox.Enabled = true;
-            GoldTextBox.Text = Program.LoadedData.AvatarGold.ToString();
+            GoldTextBox.Text = Program.LoadedData.Avatar.Gold.ToString();
 
             SilverTextBox.Enabled = true;
-            SilverTextBox.Text = Program.LoadedData.AvatarSilver.ToString();
+            SilverTextBox.Text = Program.LoadedData.Avatar.Silver.ToString();
 
             CopperTextBox.Enabled = true;
-            CopperTextBox.Text = Program.LoadedData.AvatarCopper.ToString();
+            CopperTextBox.Text = Program.LoadedData.Avatar.Copper.ToString();
         }
 
         private void AbilitySlotListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             var slot = AbilitySlotListBox.SelectedIndex;
-            AbilityTypeListBox.SelectedItem = (Program.AbilityType)Program.LoadedData.AvatarAbilities[slot].Type;
-            Program.UpdateSubtypeValue(AbilityTypeListBox, AbilitySubtypeListBox, Program.LoadedData.AvatarAbilities[slot].SubType);
-            AbilityLevelListBox.SelectedItem = (Program.AbilityLevel)Program.LoadedData.AvatarAbilities[slot].Level;
+            AbilityTypeListBox.SelectedItem = (Program.AbilityType)Program.LoadedData.Avatar.AbilityData[slot].Type;
+            Program.UpdateSubtypeValue(AbilityTypeListBox, AbilitySubtypeListBox, Program.LoadedData.Avatar.AbilityData[slot].SubType);
+            AbilityLevelListBox.SelectedItem = (Program.AbilityLevel)Program.LoadedData.Avatar.AbilityData[slot].Level;
         }
 
         private void AbilityTypeListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -101,26 +101,26 @@ namespace SFSE
 
         private void ValidateAvatarButton_Click(object sender, EventArgs e)
         {
-            var level = Program.LoadedData.AvatarLevel;
+            var level = Program.LoadedData.Avatar.Level;
 
-            var stats = Program.LoadedData.AvatarAgility +
-                Program.LoadedData.AvatarCharisma +
-                Program.LoadedData.AvatarDexterity +
-                Program.LoadedData.AvatarIntelligence +
-                Program.LoadedData.AvatarStamina +
-                Program.LoadedData.AvatarStrength +
-                Program.LoadedData.AvatarWisdom +
-                Program.LoadedData.AvatarFreeStatPoints;
+            var stats = Program.LoadedData.Avatar.Agility +
+                Program.LoadedData.Avatar.Charisma +
+                Program.LoadedData.Avatar.Dexterity +
+                Program.LoadedData.Avatar.Intelligence +
+                Program.LoadedData.Avatar.Stamina +
+                Program.LoadedData.Avatar.Strength +
+                Program.LoadedData.Avatar.Wisdom +
+                Program.LoadedData.Avatar.FreeStatPoints;
 
             var abilities = 0;
             for (var i = 0; i < 10; i++)
             {
-                var abilityLevel = Program.LoadedData.AvatarAbilities[i].Level;
+                var abilityLevel = Program.LoadedData.Avatar.AbilityData[i].Level;
                 abilities += (abilityLevel == 255) ? 0 : abilityLevel;
             }
-            abilities += Program.LoadedData.AvatarFreeAbilityPoints;
+            abilities += Program.LoadedData.Avatar.FreeAbilityPoints;
 
-            var experience = Program.LoadedData.AvatarExperience;
+            var experience = Program.LoadedData.Avatar.Experience;
 
             if (experience < Experience.ForLevel[level] || experience > Experience.ForLevel[(byte)(level + 1)])
             {
@@ -166,8 +166,8 @@ namespace SFSE
             {
                 Byte level = Convert.ToByte(LevelTextBox.Text);
                 if (level > 50 || level < 1) throw new Exception();
-                Program.LoadedData.AvatarLevel = level;
-                Program.LoadedData.AvatarExperience = Experience.FromPercent(level, (byte)LevelProgressTrackBar.Value);
+                Program.LoadedData.Avatar.Level = level;
+                Program.LoadedData.Avatar.Experience = Experience.FromPercent(level, (byte)LevelProgressTrackBar.Value);
             }
             catch
             {
@@ -177,14 +177,14 @@ namespace SFSE
 
         private void LevelProgressTrackBar_Leave(object sender, EventArgs e)
         {
-            Program.LoadedData.AvatarExperience = Experience.FromPercent(Program.LoadedData.AvatarLevel, (byte)LevelProgressTrackBar.Value);
+            Program.LoadedData.Avatar.Experience = Experience.FromPercent(Program.LoadedData.Avatar.Level, (byte)LevelProgressTrackBar.Value);
         }
 
         private void GoldTextBox_Leave(object sender, EventArgs e)
         {
             try
             {
-                Program.LoadedData.AvatarGold = Convert.ToInt32(GoldTextBox.Text);
+                Program.LoadedData.Avatar.Gold = Convert.ToInt32(GoldTextBox.Text);
             }
             catch
             {
@@ -196,7 +196,7 @@ namespace SFSE
         {
             try
             {
-                Program.LoadedData.AvatarSilver = Convert.ToInt32(SilverTextBox.Text);
+                Program.LoadedData.Avatar.Silver = Convert.ToInt32(SilverTextBox.Text);
             }
             catch
             {
@@ -208,7 +208,7 @@ namespace SFSE
         {
             try
             {
-                Program.LoadedData.AvatarCopper = Convert.ToInt32(CopperTextBox.Text);
+                Program.LoadedData.Avatar.Copper = Convert.ToInt32(CopperTextBox.Text);
             }
             catch
             {
@@ -220,11 +220,11 @@ namespace SFSE
         {
             try
             {
-                Program.LoadedData.AvatarStrength = Convert.ToInt32(StrengthTextBox.Text);
+                Program.LoadedData.Avatar.Strength = Convert.ToInt16(StrengthTextBox.Text);
             }
             catch
             {
-                MessageBox.Show("Please enter a number in a range [0, 2147483647].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter a number in a range [0, 32767].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -232,11 +232,11 @@ namespace SFSE
         {
             try
             {
-                Program.LoadedData.AvatarStamina = Convert.ToInt32(StaminaTextBox.Text);
+                Program.LoadedData.Avatar.Stamina = Convert.ToInt16(StaminaTextBox.Text);
             }
             catch
             {
-                MessageBox.Show("Please enter a number in a range [0, 2147483647].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter a number in a range [0, 32767].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -244,11 +244,11 @@ namespace SFSE
         {
             try
             {
-                Program.LoadedData.AvatarDexterity = Convert.ToInt32(DexterityTextBox.Text);
+                Program.LoadedData.Avatar.Dexterity = Convert.ToInt16(DexterityTextBox.Text);
             }
             catch
             {
-                MessageBox.Show("Please enter a number in a range [0, 2147483647].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter a number in a range [0, 32767].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -256,11 +256,11 @@ namespace SFSE
         {
             try
             {
-                Program.LoadedData.AvatarAgility = Convert.ToInt32(AgilityTextBox.Text);
+                Program.LoadedData.Avatar.Agility = Convert.ToInt16(AgilityTextBox.Text);
             }
             catch
             {
-                MessageBox.Show("Please enter a number in a range [0, 2147483647].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter a number in a range [0, 32767].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -268,11 +268,11 @@ namespace SFSE
         {
             try
             {
-                Program.LoadedData.AvatarIntelligence = Convert.ToInt32(IntelligenceTextBox.Text);
+                Program.LoadedData.Avatar.Intelligence = Convert.ToInt16(IntelligenceTextBox.Text);
             }
             catch
             {
-                MessageBox.Show("Please enter a number in a range [0, 2147483647].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter a number in a range [0, 32767].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -280,11 +280,11 @@ namespace SFSE
         {
             try
             {
-                Program.LoadedData.AvatarWisdom = Convert.ToInt32(WisdomTextBox.Text);
+                Program.LoadedData.Avatar.Wisdom = Convert.ToInt16(WisdomTextBox.Text);
             }
             catch
             {
-                MessageBox.Show("Please enter a number in a range [0, 2147483647].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter a number in a range [0, 32767].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -292,11 +292,11 @@ namespace SFSE
         {
             try
             {
-                Program.LoadedData.AvatarCharisma = Convert.ToInt32(CharismaTextBox.Text);
+                Program.LoadedData.Avatar.Charisma = Convert.ToInt16(CharismaTextBox.Text);
             }
             catch
             {
-                MessageBox.Show("Please enter a number in a range [0, 2147483647].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter a number in a range [0, 32767].", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -304,7 +304,7 @@ namespace SFSE
         {
             try
             {
-                Program.LoadedData.AvatarFreeStatPoints = Convert.ToInt16(FreeStatPointsTextBox.Text);
+                Program.LoadedData.Avatar.FreeStatPoints = Convert.ToInt16(FreeStatPointsTextBox.Text);
             }
             catch
             {
@@ -316,11 +316,11 @@ namespace SFSE
         {
             var slot = AbilitySlotListBox.SelectedIndex;
             var value = (AbilityTypeListBox.SelectedValue == null) ? (byte)255 : (byte)AbilityTypeListBox.SelectedValue;
-            Program.LoadedData.AvatarAbilities[slot].Type = value;
+            Program.LoadedData.Avatar.AbilityData[slot].Type = value;
             if (value == 255)
             {
-                Program.LoadedData.AvatarAbilities[slot].SubType = value;
-                Program.LoadedData.AvatarAbilities[slot].Level = value;
+                Program.LoadedData.Avatar.AbilityData[slot].SubType = value;
+                Program.LoadedData.Avatar.AbilityData[slot].Level = value;
             }
         }
 
@@ -328,11 +328,11 @@ namespace SFSE
         {
             var slot = AbilitySlotListBox.SelectedIndex;
             var value = (AbilitySubtypeListBox.SelectedValue == null) ? (byte)255 : (byte)AbilitySubtypeListBox.SelectedValue;
-            Program.LoadedData.AvatarAbilities[slot].SubType = value;
+            Program.LoadedData.Avatar.AbilityData[slot].SubType = value;
             if (value == 255)
             {
-                Program.LoadedData.AvatarAbilities[slot].Type = value;
-                Program.LoadedData.AvatarAbilities[slot].Level = value;
+                Program.LoadedData.Avatar.AbilityData[slot].Type = value;
+                Program.LoadedData.Avatar.AbilityData[slot].Level = value;
             }
         }
 
@@ -340,11 +340,11 @@ namespace SFSE
         {
             var slot = AbilitySlotListBox.SelectedIndex;
             var value = (AbilityLevelListBox.SelectedValue == null) ? (byte)255 : (byte)AbilityLevelListBox.SelectedValue;
-            Program.LoadedData.AvatarAbilities[slot].Level = value;
+            Program.LoadedData.Avatar.AbilityData[slot].Level = value;
             if (value == 255)
             {
-                Program.LoadedData.AvatarAbilities[slot].Type = value;
-                Program.LoadedData.AvatarAbilities[slot].SubType = value;
+                Program.LoadedData.Avatar.AbilityData[slot].Type = value;
+                Program.LoadedData.Avatar.AbilityData[slot].SubType = value;
             }
         }
 
@@ -352,7 +352,7 @@ namespace SFSE
         {
             try
             {
-                Program.LoadedData.AvatarFreeAbilityPoints = Convert.ToInt16(FreeAbilityPointsTextBox.Text);
+                Program.LoadedData.Avatar.FreeAbilityPoints = Convert.ToInt16(FreeAbilityPointsTextBox.Text);
             }
             catch
             {

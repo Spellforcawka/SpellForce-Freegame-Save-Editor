@@ -26,7 +26,7 @@ namespace SFSE
         {
             byte[] rawHeader = new byte[HeaderSize];
             fileStream.ReadExactly(rawHeader);
-            Header = Program.DeserializeValueType<SaveFileHeader>(rawHeader);
+            Header = Program.Deserialize<SaveFileHeader>(rawHeader);
             DecompressedChunks = new List<DecompressedSaveChunk>();
             while (fileStream.Position < fileStream.Length) 
             {

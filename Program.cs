@@ -1,3 +1,5 @@
+using System.Runtime.InteropServices;
+
 namespace SFSE
 {
     internal static class Program
@@ -102,18 +104,22 @@ namespace SFSE
 
         public static SaveData LoadedData;
 
-        public static unsafe byte[] SerializeValueType<T>(in T value) where T : unmanaged
+        public static unsafe byte[] Serialize<T>(T value) where T : struct
         {
-            byte[] result = new byte[sizeof(T)];
-            fixed (byte* dst = result)
-                *(T*)dst = value;
-            return result;
+            byte[] buffer = new byte[Marshal.SizeOf(value)];
+            fixed (byte* bufferPtr = buffer)
+            {
+                Marshal.StructureToPtr(value, (IntPtr)bufferPtr, true);
+            }
+            return buffer;
         }
 
-        public static unsafe T DeserializeValueType<T>(byte[] data) where T : unmanaged
+        public static unsafe T Deserialize<T>(byte[] buffer) where T : struct
         {
-            fixed (byte* src = data)
-                return *(T*)src;
+            fixed (byte* bufferPtr = buffer)
+            {
+                return (T)Marshal.PtrToStructure((IntPtr)bufferPtr, typeof(T));
+            }
         }
 
         public static void UpdateSubtypeChoices(ListBox typeListBox, ListBox subtypeListBox)
