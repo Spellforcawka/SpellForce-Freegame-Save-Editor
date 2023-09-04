@@ -8,6 +8,28 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/Spellforcawka/SpellForce-Freegame-Save-Editor</RepositoryUrl>
+    <PackageIcon></PackageIcon>
+    <Authors>Spellforcawka, VolterMC</Authors>
+    <Title>$(AssemblyName)</Title>
+    <Company>Spellforcawka</Company>
+    <ApplicationIcon>63aedee53601be749619f7968bc9ecdd.ico</ApplicationIcon>
+    <Version>1.0.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="63aedee53601be749619f7968bc9ecdd.ico" />
+  </ItemGroup>
 
 </Project>

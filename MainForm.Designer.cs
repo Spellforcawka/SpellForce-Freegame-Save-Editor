@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             OpenFileDialog = new OpenFileDialog();
             OpenFileButton = new Button();
             LevelTextBox = new TextBox();
@@ -636,6 +637,7 @@
             Controls.Add(AbilitiesGroupBox);
             Controls.Add(OpenFileButton);
             ForeColor = Color.White;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MaximumSize = new Size(388, 653);
             MinimumSize = new Size(388, 653);
