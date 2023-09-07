@@ -193,6 +193,14 @@ namespace SFSE
                     break;
             }
         }
+
+        public static void SwapAbilities(ref Ability abi1, ref Ability abi2)
+        {
+            Ability temp = abi1;
+            abi1 = abi2;
+            abi2 = temp;
+        }
+
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>

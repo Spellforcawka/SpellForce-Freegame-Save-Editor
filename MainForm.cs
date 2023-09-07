@@ -327,6 +327,11 @@ namespace SFSE
             {
                 Program.SaveFileData.AvatarData.AbilityData[slot].SubType = value;
                 Program.SaveFileData.AvatarData.AbilityData[slot].Level = value;
+
+                for (int i = slot; i < 9; ++i)
+                {
+                    Program.SwapAbilities(ref Program.SaveFileData.AvatarData.AbilityData[i], ref Program.SaveFileData.AvatarData.AbilityData[i + 1]);
+                }
             }
         }
 
@@ -339,6 +344,11 @@ namespace SFSE
             {
                 Program.SaveFileData.AvatarData.AbilityData[slot].Type = value;
                 Program.SaveFileData.AvatarData.AbilityData[slot].Level = value;
+
+                for (int i = slot; i < 9; ++i)
+                {
+                    Program.SwapAbilities(ref Program.SaveFileData.AvatarData.AbilityData[i], ref Program.SaveFileData.AvatarData.AbilityData[i + 1]);
+                }
             }
         }
 
@@ -351,6 +361,11 @@ namespace SFSE
             {
                 Program.SaveFileData.AvatarData.AbilityData[slot].Type = value;
                 Program.SaveFileData.AvatarData.AbilityData[slot].SubType = value;
+
+                for (int i = slot; i < 9; ++i)
+                {
+                    Program.SwapAbilities(ref Program.SaveFileData.AvatarData.AbilityData[i], ref Program.SaveFileData.AvatarData.AbilityData[i + 1]);
+                }
             }
         }
 
