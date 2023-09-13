@@ -90,6 +90,9 @@ namespace SFSE
 
             CopperTextBox.Enabled = true;
             CopperTextBox.Text = Program.SaveFileData.AvatarData.Copper.ToString();
+
+            BypassValidationCheckBox.Enabled = true;
+            BypassValidationCheckBox.Checked = (Program.SaveFileData.AvatarData.IsValidatedFlag == 0);
         }
 
         private void AbilitySlotListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -381,6 +384,10 @@ namespace SFSE
             }
         }
 
+        private void BypassValidationCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.SaveFileData.AvatarData.IsValidatedFlag = (BypassValidationCheckBox.Checked ? 0 : 1);
+        }
         private void SaveFileButton_Click(object sender, EventArgs e)
         {
             TimeSpan t = DateTime.UtcNow - new DateTime(1970, 1, 1);

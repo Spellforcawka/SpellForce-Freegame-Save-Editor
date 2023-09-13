@@ -80,12 +80,15 @@
             AvatarNameLabel = new Label();
             ValidateAvatarButton = new Button();
             SaveFileButton = new Button();
+            MiscellaneousGroupBox = new GroupBox();
+            BypassValidationCheckBox = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)LevelProgressTrackBar).BeginInit();
             AbilitiesGroupBox.SuspendLayout();
             StatPointsGroupBox.SuspendLayout();
             MoneyGroupBox.SuspendLayout();
             LevelGroupBox.SuspendLayout();
             AvatarInfoGroupBox.SuspendLayout();
+            MiscellaneousGroupBox.SuspendLayout();
             SuspendLayout();
             // 
             // OpenFileDialog
@@ -622,12 +625,37 @@
             SaveFileButton.UseVisualStyleBackColor = true;
             SaveFileButton.Click += SaveFileButton_Click;
             // 
+            // MiscellaneousGroupBox
+            // 
+            MiscellaneousGroupBox.Controls.Add(BypassValidationCheckBox);
+            MiscellaneousGroupBox.ForeColor = Color.White;
+            MiscellaneousGroupBox.Location = new Point(12, 608);
+            MiscellaneousGroupBox.Name = "MiscellaneousGroupBox";
+            MiscellaneousGroupBox.Size = new Size(349, 47);
+            MiscellaneousGroupBox.TabIndex = 8;
+            MiscellaneousGroupBox.TabStop = false;
+            MiscellaneousGroupBox.Text = "Miscellaneous";
+            // 
+            // BypassValidationCheckBox
+            // 
+            BypassValidationCheckBox.AutoSize = true;
+            BypassValidationCheckBox.Enabled = false;
+            BypassValidationCheckBox.ForeColor = Color.White;
+            BypassValidationCheckBox.Location = new Point(7, 22);
+            BypassValidationCheckBox.Name = "BypassValidationCheckBox";
+            BypassValidationCheckBox.Size = new Size(178, 19);
+            BypassValidationCheckBox.TabIndex = 0;
+            BypassValidationCheckBox.Text = "Bypass player data validation";
+            BypassValidationCheckBox.UseVisualStyleBackColor = true;
+            BypassValidationCheckBox.CheckedChanged += BypassValidationCheckBox_CheckedChanged;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
-            ClientSize = new Size(372, 614);
+            ClientSize = new Size(372, 667);
+            Controls.Add(MiscellaneousGroupBox);
             Controls.Add(SaveFileButton);
             Controls.Add(ValidateAvatarButton);
             Controls.Add(AvatarInfoGroupBox);
@@ -639,8 +667,8 @@
             ForeColor = Color.White;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
-            MaximumSize = new Size(388, 653);
-            MinimumSize = new Size(388, 653);
+            MaximumSize = new Size(388, 706);
+            MinimumSize = new Size(388, 706);
             Name = "MainForm";
             Text = "SpellForce Freegame Save Editor";
             ((System.ComponentModel.ISupportInitialize)LevelProgressTrackBar).EndInit();
@@ -654,6 +682,8 @@
             LevelGroupBox.PerformLayout();
             AvatarInfoGroupBox.ResumeLayout(false);
             AvatarInfoGroupBox.PerformLayout();
+            MiscellaneousGroupBox.ResumeLayout(false);
+            MiscellaneousGroupBox.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -710,5 +740,7 @@
         private Label SaveDateContentLabel;
         private Button ValidateAvatarButton;
         private Button SaveFileButton;
+        private GroupBox MiscellaneousGroupBox;
+        private CheckBox BypassValidationCheckBox;
     }
 }

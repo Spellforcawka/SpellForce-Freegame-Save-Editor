@@ -31,7 +31,7 @@ namespace SFSE
     public unsafe struct AvatarData
     {
         public Int16 Unknown1;
-        public Int32 Unknown2;
+        public Int32 IsValidatedFlag;
         public Int32 IsPredefinedFlag;
         public Byte PredefinedTemplateId;
         public Int32 Unknown3; // most commonly =100, but sometimes =201, =202
