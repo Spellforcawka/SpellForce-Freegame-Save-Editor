@@ -65,9 +65,9 @@ namespace SFSE
         public enum MindMagicSubtype : Byte
         {
             None,
-            Offensive,
-            Defensive,
             Enchantment,
+            Offensive,
+            Defensive,            
             Empty = 255,
         }
 
